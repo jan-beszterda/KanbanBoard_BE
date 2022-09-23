@@ -14,8 +14,8 @@ public class Board {
 
     private String boardName;
 
-    public Board(String boardName) {
-        this.boardName = boardName;
+    public Board() {
+
     }
 
     public Long getId() {
