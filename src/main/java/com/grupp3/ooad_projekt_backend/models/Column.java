@@ -3,19 +3,20 @@ package com.grupp3.ooad_projekt_backend.models;
 import javax.persistence.*;
 
 @Entity
-@Table(	name = "teams",
+@Table(	name = "columns",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "teamname")
+                @UniqueConstraint(columnNames = "columnname")
         })
-public class Team {
+public class Column {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String teamName;
+    private String columnName;
 
 
-    public Team() {
+    public Column() {
+
     }
 
     public Long getId() {
@@ -26,11 +27,11 @@ public class Team {
         this.id = id;
     }
 
-    public String getTeamName() {
-        return teamName;
+    public String getColumnName() {
+        return columnName;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setColumnName(String cardName) {
+        this.columnName = cardName;
     }
 }
