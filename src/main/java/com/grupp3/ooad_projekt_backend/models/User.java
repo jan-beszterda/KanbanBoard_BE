@@ -18,10 +18,21 @@ public class User {
     private String password;
     private String email;
 
-    @ManyToMany
+    @ManyToMany (mappedBy = "members")
     private List<Team> teams;
 
+    @ManyToMany (mappedBy = "invited")
+    private List<Team> invitations;
+
     public User(){}
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public List<Team> getInvitations() {
+        return invitations;
+    }
 
     public Long getId() {
         return id;

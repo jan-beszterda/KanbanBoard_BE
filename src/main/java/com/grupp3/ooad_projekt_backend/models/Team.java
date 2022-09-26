@@ -4,10 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(	name = "teams",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "teamname")
-        })
+@Table(name = "teams")
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +12,16 @@ public class Team {
     private String teamName;
 
     @ManyToMany
+    @JoinTable(name = "user_team_invites",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "team_id"))
     private List<User> invited;
+
+    @ManyToMany
+    @JoinTable(name = "team_members",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    private List<User> members;
 
     public Team() {
     }
@@ -37,6 +43,12 @@ public class Team {
     }
 
     public void addInvited(User user) {
+        if(this.invited.contains(user)) return;
         this.invited.add(user);
+    }
+
+    public void addMember(User user) {
+        this.invited.remove(user);
+        this.members.add(user);
     }
 }

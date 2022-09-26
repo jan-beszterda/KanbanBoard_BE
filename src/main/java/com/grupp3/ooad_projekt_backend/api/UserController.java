@@ -1,6 +1,7 @@
 package com.grupp3.ooad_projekt_backend.api;
 
 import com.grupp3.ooad_projekt_backend.models.Card;
+import com.grupp3.ooad_projekt_backend.models.Team;
 import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.UserService;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,11 @@ public class UserController {
     @PostMapping("/login")
     public User getUserByLogin(@RequestBody User maybeUser) {
         return userService.getLoginUser(maybeUser);
+    }
+
+    @GetMapping("/accept/{user_id}/{team_id}")
+    public Team acceptInvite(@PathVariable("user_id") Long userId, @PathVariable("team_id") Long teamId){
+        return userService.acceptInvite(userId, teamId);
     }
 
 
