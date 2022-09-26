@@ -1,6 +1,7 @@
 package com.grupp3.ooad_projekt_backend.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(	name = "teams",
@@ -11,9 +12,10 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String teamName;
 
+    @ManyToMany
+    private List<User> invited;
 
     public Team() {
     }
@@ -32,5 +34,9 @@ public class Team {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    public void addInvited(User user) {
+        this.invited.add(user);
     }
 }
