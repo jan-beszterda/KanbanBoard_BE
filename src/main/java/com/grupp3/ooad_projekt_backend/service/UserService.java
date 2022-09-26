@@ -3,10 +3,11 @@ package com.grupp3.ooad_projekt_backend.service;
 import com.grupp3.ooad_projekt_backend.dao.UserDAO;
 import com.grupp3.ooad_projekt_backend.models.Card;
 import com.grupp3.ooad_projekt_backend.models.User;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-
+@Service
 public class UserService {
     UserDAO userDAO;
     public UserService(UserDAO userDAO) {

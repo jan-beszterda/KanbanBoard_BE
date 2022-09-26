@@ -29,12 +29,12 @@ public class UserDAO {
     }
 
     public Optional<User> getLoginUser(User maybeUser) {
-        Optional<User>  storedUser = userRepository.findByUsername(maybeUser.getUserName());
-        if(storedUser.isPresent()){
-            if(storedUser.get().getPassword().equals(maybeUser.getPassword())){
-                return storedUser;
-            }
-        }
+       // Optional<User>  storedUser = userRepository.findByUsername(maybeUser.getUserName());
+        //if(storedUser.isPresent()){
+          //  if(storedUser.get().getPassword().equals(maybeUser.getPassword())){
+            //    return storedUser;
+            //}
+        //}
         return null;
     }
 }
