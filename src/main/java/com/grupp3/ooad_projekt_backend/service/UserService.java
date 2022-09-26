@@ -1,12 +1,24 @@
 package com.grupp3.ooad_projekt_backend.service;
 
 import com.grupp3.ooad_projekt_backend.dao.UserDAO;
+import com.grupp3.ooad_projekt_backend.models.Card;
+import com.grupp3.ooad_projekt_backend.models.User;
+
+import java.util.Optional;
 
 
 public class UserService {
     UserDAO userDAO;
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
+    }
+
+    public Optional<User> getUserById(Long id) {
+        return userDAO.getUserById(id);
+    }
+
+    public Optional<User> getLoginUser(User maybeUser){
+        return userDAO.getLoginUser(maybeUser);
     }
 }
 
