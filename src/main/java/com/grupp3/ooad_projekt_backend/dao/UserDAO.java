@@ -1,5 +1,6 @@
 package com.grupp3.ooad_projekt_backend.dao;
 
+import com.grupp3.ooad_projekt_backend.models.Card;
 import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.repository.UserRepository;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public class UserDAO {
         userRepository.save(user);
     }
 
-    public Optional<User> findUserById(Long id) {
+    public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -27,6 +28,14 @@ public class UserDAO {
         userRepository.save(user);
     }
 
-
+    public Optional<User> getLoginUser(User maybeUser) {
+        Optional<User>  storedUser = userRepository.findByUsername(maybeUser.getUserName());
+        if(storedUser.isPresent()){
+            if(storedUser.get().getPassword().equals(maybeUser.getPassword())){
+                return storedUser;
+            }
+        }
+        return null;
+    }
 }
 
