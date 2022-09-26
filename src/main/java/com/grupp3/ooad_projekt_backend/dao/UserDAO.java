@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserDAO {
@@ -28,14 +29,15 @@ public class UserDAO {
         userRepository.save(user);
     }
 
-    public Optional<User> getLoginUser(User maybeUser) {
-       // Optional<User>  storedUser = userRepository.findByUsername(maybeUser.getUserName());
-        //if(storedUser.isPresent()){
-          //  if(storedUser.get().getPassword().equals(maybeUser.getPassword())){
-            //    return storedUser;
-            //}
-        //}
-        return null;
-    }
+    public User getLoginUser(User maybeUser) {
+        List<User>  storedUsers = userRepository.findAll().stream()
+                .filter(p->p.getUserName().equals(maybeUser.getUserName()))
+                .filter(p -> p.getPassword().equals(maybeUser.getPassword()))
+                .toList();
+        if(storedUsers.isEmpty()){
+            return null;
+        }
+        return storedUsers.get(0);
+            }
 }
 

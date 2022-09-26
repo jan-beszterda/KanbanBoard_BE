@@ -18,8 +18,8 @@ public class UserController {
 
     /**
      * Returns the user information by id
-     * @param id
-     * @return user or null
+     * @param id    userId of the user to get information on
+     * @return user or null     user object or null if the user cannot be found
      */
     @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") Long id) {
@@ -32,16 +32,12 @@ public class UserController {
 
     /**
      * Returns user information if username and password is correct.
-     * @param maybeUser
-     * @return
+     * @param maybeUser     A userName and a passWord
+     * @return      The user if it is found, null otherwise
      */
     @PostMapping("/login")
     public User getUserByLogin(@RequestBody User maybeUser) {
-        Optional<User> user = userService.getLoginUser(maybeUser);
-        if (user.isEmpty()){
-            return null;
-        }
-        return user.get();
+        return userService.getLoginUser(maybeUser);
     }
 
 
