@@ -10,7 +10,11 @@ import java.util.Optional;
 
 @Repository
 public class TeamDAO {
-    TeamRepository teamRepository;
+    private TeamRepository teamRepository;
+
+    public TeamDAO(TeamRepository teamRepository) {
+        this.teamRepository = teamRepository;
+    }
 
     public Optional<Team> getTeamById(Long id) {
         return teamRepository.findById(id);
