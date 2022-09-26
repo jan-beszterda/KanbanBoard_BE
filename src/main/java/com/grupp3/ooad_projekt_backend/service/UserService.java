@@ -18,7 +18,7 @@ public class UserService {
         return userDAO.getUserById(id);
     }
 
-    public Optional<User> getLoginUser(User maybeUser){
+    public User getLoginUser(User maybeUser){
         return userDAO.getLoginUser(maybeUser);
     }
 }

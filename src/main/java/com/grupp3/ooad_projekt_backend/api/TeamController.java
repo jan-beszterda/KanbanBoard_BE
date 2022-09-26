@@ -23,29 +23,24 @@ public class TeamController {
 
     /**
      * Returns the team information by id
-     * @param id
+     * @param id    teamId for the team requested
      * @return user or null
      */
     @GetMapping("/{team_id}")
     public Team getTeamById(@PathVariable("team_id") Long id) {
-        /*Optional<Team> maybeTeam = teamService.getTeamById(id);
-        if (maybeTeam.isEmpty()){
-            return null;
-        }*/
-        return null;
+        return teamService.getTeamById(id);
     }
 
     /**
      * Returns "is invited" or "could not be invited".
      * @return string
      */
-   /* @GetMapping("invite/{user_id}/{team_id}")
-    public String inviteUserToTeam(@PathVariable("team_id") Long teamId, @PathVariable("team_id") Long userId) {
-        Optional<Team> maybeTeam = teamService.getTeamById(teamId);
-        if (maybeTeam.isEmpty()){
+    @GetMapping("invite/{user_id}/{team_id}")
+    public String inviteUserToTeam(@PathVariable("user_id") Long teamId, @PathVariable("team_id") Long userId) {
+        Team team = teamService.getTeamById(teamId);
+        if (team == null){
             return "Team could not be found.";
         }
-        Team team = maybeTeam.get();
 
         Optional<User> maybeUser = userService.getUserById(userId);
         if (maybeUser.isEmpty()){
@@ -57,6 +52,6 @@ public class TeamController {
 
         return "User" + user.getUserName() + " is invited to team " + team.getTeamName();
 
-    }*/
+    }
 
 }

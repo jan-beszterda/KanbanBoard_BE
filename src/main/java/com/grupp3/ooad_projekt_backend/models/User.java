@@ -1,7 +1,6 @@
 package com.grupp3.ooad_projekt_backend.models;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
 import java.util.List;
 
 @Entity
