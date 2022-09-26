@@ -3,19 +3,15 @@ package com.grupp3.ooad_projekt_backend.models;
 import javax.persistence.*;
 
 @Entity
-@Table(	name = "cards",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "cardname")
-        })
+@Table(name = "cards")
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String cardName;
 
-    public Card() {
 
+    public Card() {
     }
 
     public Long getId() {
@@ -25,6 +21,7 @@ public class Card {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public String getCardName() {
         return cardName;

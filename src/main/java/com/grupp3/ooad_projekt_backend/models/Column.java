@@ -1,6 +1,7 @@
 package com.grupp3.ooad_projekt_backend.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "columns")
@@ -10,9 +11,18 @@ public class Column {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long columnId;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private Board board;
+    private String columnTitle;
+
+    public String getColumnTitle() {
+        return columnTitle;
+    }
+
+    public void setColumnTitle(String columnTitle) {
+        this.columnTitle = columnTitle;
+    }
+
+    @OneToMany
+    private List<Card> cardList;
 
     public Column() {
     }
@@ -25,11 +35,11 @@ public class Column {
         this.columnId = columnId;
     }
 
-    public Board getBoard() {
-        return board;
+    public List<Card> getCardList() {
+        return cardList;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setCardList(List<Card> cardList) {
+        this.cardList = cardList;
     }
 }

@@ -1,6 +1,7 @@
 package com.grupp3.ooad_projekt_backend.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(	name = "boards",
@@ -14,8 +15,10 @@ public class Board {
 
     private String boardName;
 
-    public Board() {
+    @OneToMany
+    private List<Column> columnList;
 
+    public Board() {
     }
 
     public Long getId() {
