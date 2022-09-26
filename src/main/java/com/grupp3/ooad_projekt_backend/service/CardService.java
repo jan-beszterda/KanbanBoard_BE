@@ -27,4 +27,8 @@ public class CardService {
         return cardDAO.saveCard(card);
     }
 
+    public void removeCard(Long id) {
+        cardDAO.deleteCardById(id);
+    }
+
 }
