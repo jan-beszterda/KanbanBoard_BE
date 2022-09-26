@@ -1,37 +1,33 @@
-package com.grupp3.ooad_projekt_backend.models;
-
 import javax.persistence.*;
 
 @Entity
-@Table(	name = "columns",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "columnname")
-        })
+@Table(name = "columns")
 public class Column {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long columnId;
 
-    private String columnName;
-
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Board board;
 
     public Column() {
-
     }
 
-    public Long getId() {
-        return id;
+    public long getColumnId() {
+        return columnId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setColumnId(long columnId) {
+        this.columnId = columnId;
     }
 
-    public String getColumnName() {
-        return columnName;
+    public Board getBoard() {
+        return board;
     }
 
-    public void setColumnName(String cardName) {
-        this.columnName = cardName;
+    public void setBoard(Board board) {
+        this.board = board;
     }
 }
