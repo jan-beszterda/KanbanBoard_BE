@@ -1,5 +1,3 @@
-package com.grupp3.ooad_projekt_backend.models;
-
 import javax.persistence.*;
 
 @Entity
