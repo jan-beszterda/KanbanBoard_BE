@@ -1,6 +1,8 @@
 package com.grupp3.ooad_projekt_backend.models;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
+import java.util.List;
 
 @Entity
 @Table(	name = "users",
@@ -16,6 +18,9 @@ public class User {
     private String lastName;
     private String password;
     private String email;
+
+    @ManyToMany
+    private List<Team> teams;
 
     public User(){}
 
