@@ -13,6 +13,8 @@ public class Card {
     private String cardText;
     @OneToMany
     private List<Comment> comments;
+    @OneToOne
+    private User author;
 
     public Card() {
     }
@@ -47,5 +49,13 @@ public class Card {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

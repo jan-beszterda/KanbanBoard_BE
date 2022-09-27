@@ -30,4 +30,9 @@ public class CardController {
     public Card addCard(@RequestBody Card card) {
         return cardService.addCard(card);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteCardById(@PathVariable("id") Long id) {
+        cardService.removeCardById(id);
+    }
 }
