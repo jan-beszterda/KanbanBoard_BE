@@ -6,12 +6,10 @@ import javax.persistence.*;
 @Table(name = "comments")
 
 public class Comment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
     private String commentText;
-
     @ManyToOne
     @JoinColumn(name = "id")
     private User user;

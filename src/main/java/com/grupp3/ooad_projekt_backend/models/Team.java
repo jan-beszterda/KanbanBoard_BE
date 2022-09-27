@@ -13,7 +13,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String teamName;
-
+    private String teamDescription;
     @ManyToMany
     private List<User> invited;
 
@@ -36,7 +36,19 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public void addInvited(User user) {
-        this.invited.add(user);
+    public String getTeamDescription() {
+        return teamDescription;
+    }
+
+    public void setTeamDescription(String teamDescription) {
+        this.teamDescription = teamDescription;
+    }
+
+    public List<User> getInvited() {
+        return invited;
+    }
+
+    public void setInvited(List<User> invited) {
+        this.invited = invited;
     }
 }

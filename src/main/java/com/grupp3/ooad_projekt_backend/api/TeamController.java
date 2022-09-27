@@ -48,7 +48,7 @@ public class TeamController {
         }
         User user = maybeUser.get();
 
-        team.addInvited(user);
+        team.getInvited().add(user);
 
         return "User" + user.getUserName() + " is invited to team " + team.getTeamName();
 
