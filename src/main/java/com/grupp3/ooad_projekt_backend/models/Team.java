@@ -1,5 +1,7 @@
 package com.grupp3.ooad_projekt_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,8 +16,9 @@ public class Team {
     private Long id;
     private String teamName;
     private String teamDescription;
-    @ManyToMany
-    private List<User> invited;
+    @OneToMany
+    @JoinColumn(name = "memberId")
+    private List<User> teamMembers;
 
     public Team() {
     }
@@ -44,11 +47,11 @@ public class Team {
         this.teamDescription = teamDescription;
     }
 
-    public List<User> getInvited() {
-        return invited;
+    public List<User> getTeamMembers() {
+        return teamMembers;
     }
 
-    public void setInvited(List<User> invited) {
-        this.invited = invited;
+    public void setTeamMembers(List<User> teamMembers) {
+        this.teamMembers = teamMembers;
     }
 }

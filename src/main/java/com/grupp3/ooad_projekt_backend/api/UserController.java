@@ -40,5 +40,8 @@ public class UserController {
         return userService.getLoginUser(maybeUser);
     }
 
-
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
 }

@@ -21,6 +21,10 @@ public class UserService {
     public User getLoginUser(User maybeUser){
         return userDAO.getLoginUser(maybeUser);
     }
+
+    public User addUser(User user) {
+        return userDAO.addUser(user);
+    }
 }
 
 

@@ -5,11 +5,9 @@ import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.TeamService;
 import com.grupp3.ooad_projekt_backend.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -48,10 +46,19 @@ public class TeamController {
         }
         User user = maybeUser.get();
 
-        team.getInvited().add(user);
+        team.getTeamMembers().add(user);
 
         return "User" + user.getUserName() + " is invited to team " + team.getTeamName();
 
     }
 
+    @PostMapping
+    public Team createTeam(@CookieValue(name = "userId") Long id, @RequestBody Team team) {
+        return teamService.addTeam(id, team);
+    }
+
+    @GetMapping
+    public List<Team> getTeamsByMemberId(@CookieValue(name = "userId") Long userId) {
+        return teamService.getTeamsByMemberId(userId);
+    }
 }
