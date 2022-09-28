@@ -10,8 +10,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
     private String commentText;
-    @ManyToOne
-    @JoinColumn(name = "id")
+    @OneToOne
     private User user;
 
     public Comment() {

@@ -3,6 +3,7 @@ package com.grupp3.ooad_projekt_backend.service;
 import com.grupp3.ooad_projekt_backend.dao.CardDAO;
 import com.grupp3.ooad_projekt_backend.dao.ColumnDAO;
 import com.grupp3.ooad_projekt_backend.models.Card;
+import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Column;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +13,8 @@ import java.util.Optional;
 @Service
 public class ColumnService {
 
-    private ColumnDAO columnDAO;
-    private CardDAO cardDAO;
+    final private ColumnDAO columnDAO;
+    final private CardDAO cardDAO;
 
     public ColumnService(ColumnDAO columnDAO, CardDAO cardDAO) {
         this.columnDAO = columnDAO;
@@ -58,4 +59,9 @@ public class ColumnService {
         columnDAO.saveColumn(columnTo);
 
     }
+    
+    public void removeColumnById(Long id) {
+        columnDAO.removeColumnById(id);
+    }
 }
+

@@ -1,11 +1,12 @@
 package com.grupp3.ooad_projekt_backend.api;
 
-import com.grupp3.ooad_projekt_backend.models.Card;
+import com.grupp3.ooad_projekt_backend.models.Team;
 import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -31,6 +32,27 @@ public class UserController {
     }
 
     /**
+     * Returns a list of users information by name
+     * @param userName    Name of the users to get information on
+     * @return user or null     user object or null if the user cannot be found
+     */
+    @GetMapping("/searchName/{name}")
+    public List<User> getUsersByName(@PathVariable("name") String userName) {
+        return userService.getUsersByName(userName);
+    }
+
+    /**
+     * Returns a list of users information by email
+     * @param userEmail    Name of the users to get information on
+     * @return user or null     user object or null if the user cannot be found
+     */
+    @GetMapping("/searchName/{email}")
+    public List<User> getUsersByEmail(@PathVariable("email") String userEmail) {
+        return userService.getUsersByEmail(userEmail);
+    }
+
+
+    /**
      * Returns user information if username and password is correct.
      * @param maybeUser     A userName and a passWord
      * @return      The user if it is found, null otherwise
@@ -40,5 +62,13 @@ public class UserController {
         return userService.getLoginUser(maybeUser);
     }
 
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
 
+    @GetMapping("/accept/{user_id}/{team_id}")
+    public Team acceptInvite(@PathVariable("user_id") Long userId, @PathVariable("team_id") Long teamId){
+        return userService.acceptInvite(userId, teamId);
+    }
 }

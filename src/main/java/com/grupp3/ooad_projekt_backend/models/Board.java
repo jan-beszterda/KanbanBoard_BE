@@ -4,17 +4,15 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(	name = "boards",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "boardname")
-        })
+@Table(	name = "boards")
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String boardName;
     private String boardDescription;
-    @OneToMany
+
+    @OneToMany(mappedBy="board")
     private List<Column> columnList;
 
     public Board() {
@@ -51,4 +49,7 @@ public class Board {
     public void setColumnList(List<Column> columnList) {
         this.columnList = columnList;
     }
+
+    public void addColumn(Column column){ this.columnList.add(column); }
+
 }
