@@ -6,6 +6,7 @@ import com.grupp3.ooad_projekt_backend.models.Team;
 import com.grupp3.ooad_projekt_backend.models.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +36,14 @@ public class UserService {
             return teamDAO.addMember(team, user);
         }
         return null;
+    }
+
+    public List<User> getUsersByName(String userName) {
+        return userDAO.getAllUsers().stream().filter(p -> p.getUserName().equals(userName)).toList();
+    }
+
+    public List<User> getUsersByEmail(String userEmail) {
+        return userDAO.getAllUsers().stream().filter(p -> p.getUserName().equals(userEmail)).toList();
     }
 }
 

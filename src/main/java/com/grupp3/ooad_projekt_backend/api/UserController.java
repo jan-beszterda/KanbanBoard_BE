@@ -7,6 +7,7 @@ import com.grupp3.ooad_projekt_backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -30,6 +31,27 @@ public class UserController {
         }
         return user.get();
     }
+
+    /**
+     * Returns a list of users information by name
+     * @param userName    Name of the users to get information on
+     * @return user or null     user object or null if the user cannot be found
+     */
+    @GetMapping("/searchName/{name}")
+    public List<User> getUsersByName(@PathVariable("name") String userName) {
+        return userService.getUsersByName(userName);
+    }
+
+    /**
+     * Returns a list of users information by email
+     * @param userEmail    Name of the users to get information on
+     * @return user or null     user object or null if the user cannot be found
+     */
+    @GetMapping("/searchName/{email}")
+    public List<User> getUsersByEmail(@PathVariable("email") String userEmail) {
+        return userService.getUsersByEmail(userEmail);
+    }
+
 
     /**
      * Returns user information if username and password is correct.

@@ -23,6 +23,14 @@ public class Team {
             inverseJoinColumns = @JoinColumn(name = "team_id"))
     private List<User> members;
 
+    @ManyToMany
+    @JoinTable(name = "team_boards",
+            joinColumns = @JoinColumn(name = "board_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    private List<Board> boards;
+
+
+
     public Team() {
     }
 
@@ -38,6 +46,17 @@ public class Team {
         return teamName;
     }
 
+    public List<User> getInvited() {
+        return invited;
+    }
+
+    public List<User> getMembers() {
+        return members;
+    }
+
+    public List<Board> getBoards() {
+        return boards;
+    }
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
