@@ -11,24 +11,35 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
     private String userName;
     private String firstName;
     private String lastName;
     private String password;
     private String email;
 
-    @ManyToMany
+    @ManyToMany (mappedBy = "members")
     private List<Team> teams;
+
+    @ManyToMany (mappedBy = "invited")
+    private List<Team> invitations;
 
     public User(){}
 
-    public Long getId() {
-        return id;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public List<Team> getInvitations() {
+        return invitations;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long id) {
+        this.userId = id;
     }
 
     public String getUserName() {

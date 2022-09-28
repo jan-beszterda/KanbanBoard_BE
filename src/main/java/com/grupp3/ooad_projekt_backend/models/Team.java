@@ -4,10 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(	name = "teams",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "teamname")
-        })
+@Table(name = "teams")
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +12,24 @@ public class Team {
     private String teamName;
     private String teamDescription;
     @ManyToMany
+    @JoinTable(name = "user_team_invites",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "team_id"))
     private List<User> invited;
+
+    @ManyToMany
+    @JoinTable(name = "team_members",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    private List<User> members;
+
+    @ManyToMany
+    @JoinTable(name = "team_boards",
+            joinColumns = @JoinColumn(name = "board_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    private List<Board> boards;
+
+
 
     public Team() {
     }
@@ -32,8 +46,25 @@ public class Team {
         return teamName;
     }
 
+    public List<User> getInvited() {
+        return invited;
+    }
+
+    public List<User> getMembers() {
+        return members;
+    }
+
+    public List<Board> getBoards() {
+        return boards;
+    }
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+
+    public void addInvited(User user) {
+        if(this.invited.contains(user)) return;
+        this.invited.add(user);
     }
 
     public String getTeamDescription() {
@@ -50,5 +81,10 @@ public class Team {
 
     public void setInvited(List<User> invited) {
         this.invited = invited;
+    }
+
+    public void addMember(User user) {
+        this.invited.remove(user);
+        this.members.add(user);
     }
 }

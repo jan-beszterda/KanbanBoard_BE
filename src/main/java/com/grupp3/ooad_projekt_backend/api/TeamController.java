@@ -5,10 +5,7 @@ import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.TeamService;
 import com.grupp3.ooad_projekt_backend.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -51,7 +48,11 @@ public class TeamController {
         team.getInvited().add(user);
 
         return "User" + user.getUserName() + " is invited to team " + team.getTeamName();
+    }
 
+    @PostMapping("/new")
+    public Team createTeam(@RequestBody Team newTeam) {
+        return teamService.newTeam(newTeam);
     }
 
 }

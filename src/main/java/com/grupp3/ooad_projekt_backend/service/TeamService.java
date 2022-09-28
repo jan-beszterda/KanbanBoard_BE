@@ -21,6 +21,9 @@ public class TeamService {
         return maybeTeam.get();
     }
 
+    public Team newTeam(Team newTeam) {
+        return newTeam;
+    }
 }
 
 
