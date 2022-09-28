@@ -22,13 +22,17 @@ public class TeamDAO {
         return teamRepository.findById(id);
     }
 
-    public Team addMember(Team team, User user) {
-        team.addMember(user);
+    public Team addTeam(Team team) {
         return teamRepository.save(team);
     }
 
-    public List<Team> getAllTeams() {
+    public List<Team> findAllTeams() {
         return teamRepository.findAll();
+    }
+    
+     public Team addMember(Team team, User user) {
+        team.addMember(user);
+        return teamRepository.save(team);
     }
 }
 

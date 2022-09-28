@@ -1,5 +1,7 @@
 package com.grupp3.ooad_projekt_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,24 +14,13 @@ public class Team {
     private String teamName;
     private String teamDescription;
     @ManyToMany
-    @JoinTable(name = "user_team_invites",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "team_id"))
-    private List<User> invited;
-
-    @ManyToMany
-    @JoinTable(name = "team_members",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id"))
-    private List<User> members;
-
-    @ManyToMany
-    @JoinTable(name = "team_boards",
-            joinColumns = @JoinColumn(name = "board_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    @JoinTable(
+            name = "team_members",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "member_id"))
+    private List<User> teamMembers;
+    @OneToMany
     private List<Board> boards;
-
-
 
     public Team() {
     }
@@ -71,12 +62,20 @@ public class Team {
         this.teamDescription = teamDescription;
     }
 
-    public List<User> getInvited() {
-        return invited;
+    public List<User> getTeamMembers() {
+        return teamMembers;
     }
 
-    public void setInvited(List<User> invited) {
-        this.invited = invited;
+    public void setTeamMembers(List<User> teamMembers) {
+        this.teamMembers = teamMembers;
+    }
+
+    public List<Board> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<Board> boards) {
+        this.boards = boards;
     }
 
     public void addMember(User user) {

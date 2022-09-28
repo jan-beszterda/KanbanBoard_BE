@@ -24,13 +24,18 @@ public class BoardController {
         return boardService.getBoardById(id);
     }
 
-    @PostMapping
-    public Board createBoard(@RequestBody Board board) {
-        return boardService.addBoard(board);
+    @PostMapping("/{teamId}/create")
+    public Board createBoard(@PathVariable("teamId") Long teamId, @RequestBody Board board) {
+        return boardService.addBoard(teamId, board);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBoardById(@PathVariable("id") Long id) {
         boardService.removeBoardById(id);
+    }
+
+    @GetMapping("/team")
+    public List<Board> getBoardsByTeamId(@RequestParam(value = "team") String id) {
+        return boardService.getBoardByTeamId(Long.parseLong(id));
     }
 }

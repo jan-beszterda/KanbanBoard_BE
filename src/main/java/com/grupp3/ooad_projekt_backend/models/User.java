@@ -1,12 +1,14 @@
 package com.grupp3.ooad_projekt_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(	name = "users",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "username")
+                @UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")
         })
 public class User {
     @Id
@@ -17,8 +19,8 @@ public class User {
     private String lastName;
     private String password;
     private String email;
-
-    @ManyToMany (mappedBy = "members")
+    @ManyToMany(mappedBy = "teamMembers")
+    @JsonIgnore
     private List<Team> teams;
 
     @ManyToMany (mappedBy = "invited")
@@ -80,5 +82,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }

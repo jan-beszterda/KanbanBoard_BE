@@ -62,10 +62,13 @@ public class UserController {
         return userService.getLoginUser(maybeUser);
     }
 
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
+
     @GetMapping("/accept/{user_id}/{team_id}")
     public Team acceptInvite(@PathVariable("user_id") Long userId, @PathVariable("team_id") Long teamId){
         return userService.acceptInvite(userId, teamId);
     }
-
-
 }

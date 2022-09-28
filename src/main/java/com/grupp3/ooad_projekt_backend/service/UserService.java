@@ -26,6 +26,9 @@ public class UserService {
         return userDAO.getLoginUser(maybeUser);
     }
 
+    public User addUser(User user) {
+        return userDAO.addUser(user);
+
     public Team acceptInvite(Long userId, Long teamId) {
         Optional<User> maybeUser = userDAO.getUserById(userId);
         Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);

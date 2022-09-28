@@ -1,5 +1,6 @@
 package com.grupp3.ooad_projekt_backend.api;
 
+import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Team;
 import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.TeamService;
@@ -57,7 +58,7 @@ public class TeamController {
         }
         User user = maybeUser.get();
 
-        team.getInvited().add(user);
+        team.getTeamMembers().add(user);
 
         return "User" + user.getUserName() + " is invited to team " + team.getTeamName();
     }
@@ -67,4 +68,13 @@ public class TeamController {
         return teamService.newTeam(newTeam);
     }
 
+    @PostMapping
+    public Team createTeam(@CookieValue(name = "userId") Long id, @RequestBody Team team) {
+        return teamService.addTeam(id, team);
+    }
+
+    @GetMapping
+    public List<Team> getTeamsByMemberId(@CookieValue(name = "userId") Long userId) {
+        return teamService.getTeamsByMemberId(userId);
+    }
 }
