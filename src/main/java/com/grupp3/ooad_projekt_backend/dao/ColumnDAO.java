@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public class ColumnDAO {
 
-    private ColumnRepository columnRepository;
+    final private ColumnRepository columnRepository;
 
     public ColumnDAO(ColumnRepository columnRepository) {
         this.columnRepository = columnRepository;
@@ -24,6 +24,10 @@ public class ColumnDAO {
     }
 
     public Object findAllColumns() {return columnRepository.findAll();}
+
+    public void removeColumnById(Long id) {
+        columnRepository.deleteById(id);
+    }
 
 }
 
