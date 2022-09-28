@@ -24,6 +24,11 @@ public class BoardController {
         return boardService.getBoardById(id);
     }
 
+    @GetMapping("/move/{board_id}/{column_id}/{new_index}")
+    public Board moveColumn(@PathVariable("board_id") Long boardId, @PathVariable("column_id") Long columnId, @PathVariable("new_index") int index) {
+        return boardService.moveColumn(boardId, columnId, index);
+    }
+
     @PostMapping("/{teamId}/create")
     public Board createBoard(@PathVariable("teamId") Long teamId, @RequestBody Board board) {
         return boardService.addBoard(teamId, board);
