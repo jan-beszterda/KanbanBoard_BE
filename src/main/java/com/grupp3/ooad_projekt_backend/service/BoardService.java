@@ -12,8 +12,8 @@ import java.util.Optional;
 
 @Service
 public class BoardService {
-    private BoardDAO boardDAO;
-    private TeamDAO teamDAO;
+    final private BoardDAO boardDAO;
+    final private TeamDAO teamDAO;
     public BoardService(BoardDAO boardDAO, TeamDAO teamDAO) {
         this.boardDAO = boardDAO;
         this.teamDAO = teamDAO;
