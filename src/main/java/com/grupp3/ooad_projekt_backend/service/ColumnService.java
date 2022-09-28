@@ -32,7 +32,7 @@ public class ColumnService {
         return columnDAO.saveColumn(column);
     }
 
-    public void moveCard(Long columnId1, Long columnId2, Long cardId) {
+    public void moveCard(Long cardId, Long columnId1, Long columnId2) {
         Optional<Column> maybeColumnFrom = columnDAO.findColumnById(columnId1);
         if (maybeColumnFrom.isEmpty()) {
             return;

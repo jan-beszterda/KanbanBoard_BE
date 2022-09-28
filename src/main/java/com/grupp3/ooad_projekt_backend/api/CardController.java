@@ -39,7 +39,6 @@ public class CardController {
     }
 
 
-    //move card from one column to another
     @PutMapping("/{cardId}/moveFrom/{columnId1}/to/{columnId2}")
     public void moveCard(@PathVariable("cardId") Long cardId, @PathVariable("columnId1") Long columnId1,
                          @PathVariable("columnId2") Long columnId2) {
