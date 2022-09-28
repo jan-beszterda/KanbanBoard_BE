@@ -32,4 +32,6 @@ public class ColumnController {
     public Column addColumn(@RequestBody Column column) {
         return columnService.addColumn(column);
     }
+
+
 }
