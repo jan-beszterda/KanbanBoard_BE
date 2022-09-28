@@ -46,10 +46,6 @@ public class Team {
         return teamName;
     }
 
-    public List<User> getInvited() {
-        return invited;
-    }
-
     public List<User> getMembers() {
         return members;
     }

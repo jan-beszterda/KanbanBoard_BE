@@ -43,7 +43,7 @@ public class UserService {
     }
 
     public List<User> getUsersByEmail(String userEmail) {
-        return userDAO.getAllUsers().stream().filter(p -> p.getUserName().equals(userEmail)).toList();
+        return userDAO.getAllUsers().stream().filter(p -> p.getEmail().equals(userEmail)).toList();
     }
 }
 

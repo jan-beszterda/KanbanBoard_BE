@@ -1,6 +1,5 @@
 package com.grupp3.ooad_projekt_backend.api;
 
-import com.grupp3.ooad_projekt_backend.models.Card;
 import com.grupp3.ooad_projekt_backend.models.Team;
 import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.UserService;

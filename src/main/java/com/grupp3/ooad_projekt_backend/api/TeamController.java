@@ -7,6 +7,7 @@ import com.grupp3.ooad_projekt_backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -17,6 +18,17 @@ public class TeamController {
 
     private final TeamService teamService;
     private final UserService userService;
+
+    /**
+     * Search for teams by name
+     * @param teamName    teamName for the teams to find
+     * @return list of teams
+     */
+
+    @GetMapping("/search_name/{team_name}")
+    public List<Team> getTeamsByName(@PathVariable("team_name") String teamName) {
+        return teamService.getTeamsByName(teamName);
+    }
 
     /**
      * Returns the team information by id
