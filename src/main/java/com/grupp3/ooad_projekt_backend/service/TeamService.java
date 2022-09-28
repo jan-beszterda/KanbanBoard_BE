@@ -2,6 +2,7 @@ package com.grupp3.ooad_projekt_backend.service;
 
 import com.grupp3.ooad_projekt_backend.dao.TeamDAO;
 import com.grupp3.ooad_projekt_backend.dao.UserDAO;
+import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Team;
 import com.grupp3.ooad_projekt_backend.models.User;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,14 @@ public class TeamService {
                 .filter(team -> team.getTeamMembers().stream()
                         .anyMatch(user -> userId.equals(user.getId())))
                 .toList();
+    }
+
+    public List<Board> getBoardByTeamId(Long id) {
+        Optional<Team> team = teamDAO.getTeamById(id);
+        if (team.isEmpty()) {
+            return null;
+        }
+        return team.get().getBoards();
     }
 }
 

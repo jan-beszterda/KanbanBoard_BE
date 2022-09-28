@@ -1,5 +1,6 @@
 package com.grupp3.ooad_projekt_backend.api;
 
+import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Team;
 import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.TeamService;
@@ -60,5 +61,10 @@ public class TeamController {
     @GetMapping
     public List<Team> getTeamsByMemberId(@CookieValue(name = "userId") Long userId) {
         return teamService.getTeamsByMemberId(userId);
+    }
+
+    @GetMapping("/{id}/boards")
+    public List<Board> getBoardsByTeamId(@PathVariable(name = "id") Long id) {
+        return teamService.getBoardByTeamId(id);
     }
 }

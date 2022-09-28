@@ -24,9 +24,9 @@ public class BoardController {
         return boardService.getBoardById(id);
     }
 
-    @PostMapping
-    public Board createBoard(@RequestBody Board board) {
-        return boardService.addBoard(board);
+    @PostMapping("/{teamId}/create")
+    public Board createBoard(@PathVariable("teamId") Long teamId, @RequestBody Board board) {
+        return boardService.addBoard(teamId, board);
     }
 
     @DeleteMapping("/{id}")

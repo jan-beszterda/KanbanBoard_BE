@@ -22,6 +22,8 @@ public class Team {
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "member_id"))
     private List<User> teamMembers;
+    @OneToMany
+    private List<Board> boards;
 
     public Team() {
     }
@@ -56,5 +58,13 @@ public class Team {
 
     public void setTeamMembers(List<User> teamMembers) {
         this.teamMembers = teamMembers;
+    }
+
+    public List<Board> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<Board> boards) {
+        this.boards = boards;
     }
 }

@@ -1,5 +1,7 @@
 package com.grupp3.ooad_projekt_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class User {
     private String email;
 
     @ManyToMany(mappedBy = "teamMembers")
+    @JsonIgnore
     private List<Team> teams;
 
     public User(){}
