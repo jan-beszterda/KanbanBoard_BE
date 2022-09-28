@@ -48,14 +48,6 @@ public class TeamService {
                         .anyMatch(user -> userId.equals(user.getId())))
                 .toList();
     }
-
-    public List<Board> getBoardByTeamId(Long id) {
-        Optional<Team> team = teamDAO.getTeamById(id);
-        if (team.isEmpty()) {
-            return null;
-        }
-        return team.get().getBoards();
-    }
 }
 
 

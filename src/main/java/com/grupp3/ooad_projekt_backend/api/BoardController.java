@@ -33,4 +33,9 @@ public class BoardController {
     public void deleteBoardById(@PathVariable("id") Long id) {
         boardService.removeBoardById(id);
     }
+
+    @GetMapping("/team")
+    public List<Board> getBoardsByTeamId(@RequestParam(value = "team") String id) {
+        return boardService.getBoardByTeamId(Long.parseLong(id));
+    }
 }

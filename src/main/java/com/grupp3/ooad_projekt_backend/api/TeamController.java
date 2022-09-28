@@ -62,9 +62,4 @@ public class TeamController {
     public List<Team> getTeamsByMemberId(@CookieValue(name = "userId") Long userId) {
         return teamService.getTeamsByMemberId(userId);
     }
-
-    @GetMapping("/{id}/boards")
-    public List<Board> getBoardsByTeamId(@PathVariable(name = "id") Long id) {
-        return teamService.getBoardByTeamId(id);
-    }
 }

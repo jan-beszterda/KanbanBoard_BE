@@ -46,6 +46,14 @@ public class BoardService {
     public void removeBoardById(Long id) {
         boardDAO.removeBoardById(id);
     }
+
+    public List<Board> getBoardByTeamId(Long id) {
+        Optional<Team> team = teamDAO.getTeamById(id);
+        if (team.isEmpty()) {
+            return null;
+        }
+        return team.get().getBoards();
+    }
 }
 
 
