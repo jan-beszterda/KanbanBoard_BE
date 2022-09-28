@@ -16,8 +16,11 @@ public class Team {
     private Long id;
     private String teamName;
     private String teamDescription;
-    @OneToMany
-    @JoinColumn(name = "memberId")
+    @ManyToMany
+    @JoinTable(
+            name = "team_members",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "member_id"))
     private List<User> teamMembers;
 
     public Team() {
