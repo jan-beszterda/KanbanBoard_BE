@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.zip.ZipFile;
 
 @Repository
 public class TeamDAO {
-    private TeamRepository teamRepository;
+    private final TeamRepository teamRepository;
 
     public TeamDAO(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
@@ -27,6 +28,11 @@ public class TeamDAO {
 
     public List<Team> findAllTeams() {
         return teamRepository.findAll();
+    }
+    
+     public Team addMember(Team team, User user) {
+        team.addMember(user);
+        return teamRepository.save(team);
     }
 }
 

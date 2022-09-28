@@ -21,6 +21,17 @@ public class TeamController {
     private final UserService userService;
 
     /**
+     * Search for teams by name
+     * @param teamName    teamName for the teams to find
+     * @return list of teams
+     */
+
+    @GetMapping("/search_name/{team_name}")
+    public List<Team> getTeamsByName(@PathVariable("team_name") String teamName) {
+        return teamService.getTeamsByName(teamName);
+    }
+
+    /**
      * Returns the team information by id
      * @param id    teamId for the team requested
      * @return user or null
@@ -50,7 +61,11 @@ public class TeamController {
         team.getTeamMembers().add(user);
 
         return "User" + user.getUserName() + " is invited to team " + team.getTeamName();
+    }
 
+    @PostMapping("/new")
+    public Team createTeam(@RequestBody Team newTeam) {
+        return teamService.newTeam(newTeam);
     }
 
     @PostMapping

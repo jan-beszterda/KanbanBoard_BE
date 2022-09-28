@@ -48,6 +48,14 @@ public class TeamService {
                         .anyMatch(user -> userId.equals(user.getId())))
                 .toList();
     }
+    
+    public Team newTeam(Team newTeam) {
+        return newTeam;
+    }
+
+    public List<Team> getTeamsByName(String teamName) {
+        return teamDAO.getAllTeams().stream().filter(p -> p.getTeamName().equals(teamName)).toList();
+    }
 }
 
 

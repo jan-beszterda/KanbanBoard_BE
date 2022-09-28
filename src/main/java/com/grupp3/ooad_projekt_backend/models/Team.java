@@ -6,10 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(	name = "teams",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "teamname")
-        })
+@Table(name = "teams")
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +37,21 @@ public class Team {
         return teamName;
     }
 
+    public List<User> getMembers() {
+        return members;
+    }
+
+    public List<Board> getBoards() {
+        return boards;
+    }
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+
+    public void addInvited(User user) {
+        if(this.invited.contains(user)) return;
+        this.invited.add(user);
     }
 
     public String getTeamDescription() {
@@ -66,5 +76,10 @@ public class Team {
 
     public void setBoards(List<Board> boards) {
         this.boards = boards;
+    }
+
+    public void addMember(User user) {
+        this.invited.remove(user);
+        this.members.add(user);
     }
 }
