@@ -24,13 +24,10 @@ public class User {
     private List<Team> teams;
 
     @ManyToMany (mappedBy = "invited")
+    @JsonIgnore
     private List<Team> invitations;
 
     public User(){}
-
-    public List<Team> getTeams() {
-        return teams;
-    }
 
     public List<Team> getInvitations() {
         return invitations;

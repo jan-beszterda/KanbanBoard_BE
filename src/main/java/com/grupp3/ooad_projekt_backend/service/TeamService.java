@@ -45,7 +45,7 @@ public class TeamService {
     public List<Team> getTeamsByMemberId(Long userId) {
         return teamDAO.findAllTeams().stream()
                 .filter(team -> team.getTeamMembers().stream()
-                        .anyMatch(user -> userId.equals(user.getId())))
+                        .anyMatch(user -> userId.equals(user.getUserId())))
                 .toList();
     }
     
@@ -54,7 +54,7 @@ public class TeamService {
     }
 
     public List<Team> getTeamsByName(String teamName) {
-        return teamDAO.getAllTeams().stream().filter(p -> p.getTeamName().equals(teamName)).toList();
+        return teamDAO.findAllTeams().stream().filter(p -> p.getTeamName().equals(teamName)).toList();
     }
 }
 

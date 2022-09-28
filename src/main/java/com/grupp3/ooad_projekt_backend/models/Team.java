@@ -19,6 +19,12 @@ public class Team {
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "member_id"))
     private List<User> teamMembers;
+    @ManyToMany
+    @JoinTable(
+            name = "invitees",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "invitee_id"))
+    private List<User> invited;
     @OneToMany
     private List<Board> boards;
 
@@ -38,12 +44,9 @@ public class Team {
     }
 
     public List<User> getMembers() {
-        return members;
+        return teamMembers;
     }
 
-    public List<Board> getBoards() {
-        return boards;
-    }
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
@@ -80,6 +83,6 @@ public class Team {
 
     public void addMember(User user) {
         this.invited.remove(user);
-        this.members.add(user);
+        this.teamMembers.add(user);
     }
 }
