@@ -2,6 +2,7 @@ package com.grupp3.ooad_projekt_backend.service;
 
 import com.grupp3.ooad_projekt_backend.dao.CardDAO;
 import com.grupp3.ooad_projekt_backend.dao.ColumnDAO;
+import com.grupp3.ooad_projekt_backend.models.Card;
 import com.grupp3.ooad_projekt_backend.models.Column;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,30 @@ public class ColumnService {
         return columnDAO.saveColumn(column);
     }
 
+    public void moveCard(Long columnId1, Long columnId2, Long cardId) {
+        Optional<Column> maybeColumnFrom = columnDAO.findColumnById(columnId1);
+        if (maybeColumnFrom.isEmpty()) {
+            return;
+        }
+        Column columnFrom = maybeColumnFrom.get();
 
+        Optional<Column> maybeColumnTo = columnDAO.findColumnById(columnId2);
+        if (maybeColumnTo.isEmpty()) {
+            return;
+        }
+        Column columnTo = maybeColumnTo.get();
+
+        Optional<Card> maybeCard = cardDAO.findCardById(cardId);
+        if (maybeCard.isEmpty()) {
+            return;
+        }
+        Card cardToMove = maybeCard.get();
+
+        columnFrom.getCardList().remove(cardToMove);
+        columnTo.getCardList().add(cardToMove);
+
+        columnDAO.saveColumn(columnFrom);
+        columnDAO.saveColumn(columnTo);
+
+    }
 }
