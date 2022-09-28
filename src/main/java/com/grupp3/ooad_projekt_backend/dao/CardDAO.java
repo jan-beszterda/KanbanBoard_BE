@@ -27,4 +27,7 @@ public class CardDAO {
         return repository.findAll();
     }
 
+    public void removeCardById(Long id) {
+        repository.deleteById(id);
+    }
 }

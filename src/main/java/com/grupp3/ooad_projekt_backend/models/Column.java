@@ -6,21 +6,10 @@ import java.util.List;
 @Entity
 @Table(name = "columns")
 public class Column {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long columnId;
-
     private String columnTitle;
-
-    public String getColumnTitle() {
-        return columnTitle;
-    }
-
-    public void setColumnTitle(String columnTitle) {
-        this.columnTitle = columnTitle;
-    }
-
     @OneToMany
     private List<Card> cardList;
 
@@ -33,6 +22,14 @@ public class Column {
 
     public void setColumnId(long columnId) {
         this.columnId = columnId;
+    }
+
+    public String getColumnTitle() {
+        return columnTitle;
+    }
+
+    public void setColumnTitle(String columnTitle) {
+        this.columnTitle = columnTitle;
     }
 
     public List<Card> getCardList() {

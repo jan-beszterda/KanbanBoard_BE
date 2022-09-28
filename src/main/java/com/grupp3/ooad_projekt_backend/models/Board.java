@@ -12,9 +12,8 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String boardName;
-
+    private String boardDescription;
     @OneToMany
     private List<Column> columnList;
 
@@ -35,5 +34,21 @@ public class Board {
 
     public void setBoardName(String boardName) {
         this.boardName = boardName;
+    }
+
+    public String getBoardDescription() {
+        return boardDescription;
+    }
+
+    public void setBoardDescription(String boardDescription) {
+        this.boardDescription = boardDescription;
+    }
+
+    public List<Column> getColumnList() {
+        return columnList;
+    }
+
+    public void setColumnList(List<Column> columnList) {
+        this.columnList = columnList;
     }
 }

@@ -10,7 +10,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String teamName;
-
+    private String teamDescription;
     @ManyToMany
     @JoinTable(name = "user_team_invites",
     joinColumns = @JoinColumn(name = "user_id"),
@@ -61,9 +61,26 @@ public class Team {
         this.teamName = teamName;
     }
 
+
     public void addInvited(User user) {
         if(this.invited.contains(user)) return;
         this.invited.add(user);
+    }
+
+    public String getTeamDescription() {
+        return teamDescription;
+    }
+
+    public void setTeamDescription(String teamDescription) {
+        this.teamDescription = teamDescription;
+    }
+
+    public List<User> getInvited() {
+        return invited;
+    }
+
+    public void setInvited(List<User> invited) {
+        this.invited = invited;
     }
 
     public void addMember(User user) {
