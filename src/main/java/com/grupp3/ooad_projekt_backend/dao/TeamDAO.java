@@ -6,7 +6,9 @@ import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.repository.TeamRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.zip.ZipFile;
 
 @Repository
 public class TeamDAO {
@@ -23,6 +25,10 @@ public class TeamDAO {
     public Team addMember(Team team, User user) {
         team.addMember(user);
         return teamRepository.save(team);
+    }
+
+    public List<Team> getAllTeams() {
+        return teamRepository.findAll();
     }
 }
 
