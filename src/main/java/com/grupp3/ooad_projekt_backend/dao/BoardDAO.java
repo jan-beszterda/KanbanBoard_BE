@@ -1,6 +1,7 @@
 package com.grupp3.ooad_projekt_backend.dao;
 
 import com.grupp3.ooad_projekt_backend.models.Board;
+import com.grupp3.ooad_projekt_backend.models.Column;
 import com.grupp3.ooad_projekt_backend.repository.BoardRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,6 @@ public class BoardDAO {
     public void removeBoardById(Long id) {
         boardRepository.deleteById(id);
     }
+
 }
 
