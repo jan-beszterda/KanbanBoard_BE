@@ -71,4 +71,9 @@ public class UserController {
     public Team acceptInvite(@PathVariable("user_id") Long userId, @PathVariable("team_id") Long teamId){
         return userService.acceptInvite(userId, teamId);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteUserAccount(@PathVariable("id") Long id) {
+        userService.removeUser(id);
+    }
 }
