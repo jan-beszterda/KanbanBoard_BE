@@ -44,5 +44,9 @@ public class UserDAO {
     public User addUser(User user) {
         return userRepository.save(user);
     }
+
+    public void removeUser(Long id) {
+        userRepository.deleteById(id);
+    }
 }
 
