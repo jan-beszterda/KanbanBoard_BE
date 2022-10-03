@@ -14,8 +14,9 @@ public class UserService {
     UserDAO userDAO;
     TeamDAO teamDAO;
 
-    public UserService(UserDAO userDAO) {
+    public UserService(UserDAO userDAO, TeamDAO teamDAO) {
         this.userDAO = userDAO;
+        this.teamDAO = teamDAO;
     }
 
     public Optional<User> getUserById(Long id) {
@@ -36,9 +37,10 @@ public class UserService {
         if (maybeUser.isEmpty() || maybeTeam.isEmpty()) {
             return null;
         }
-        if (maybeUser.get().getInvitations().contains(maybeTeam.get())) {
-            Team team = maybeTeam.get();
-            User user = maybeUser.get();
+        User user = maybeUser.get();
+        Team team = maybeTeam.get();
+        if (user.getInvitations().contains(team)) {
+            team.getInvited().remove(user);
             return teamDAO.addMember(team, user);
         }
         return null;

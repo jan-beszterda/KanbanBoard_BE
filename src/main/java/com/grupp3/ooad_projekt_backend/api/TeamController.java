@@ -1,15 +1,11 @@
 package com.grupp3.ooad_projekt_backend.api;
 
-import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Team;
-import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.TeamService;
-import com.grupp3.ooad_projekt_backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -18,7 +14,6 @@ import java.util.Optional;
 public class TeamController {
 
     private final TeamService teamService;
-    private final UserService userService;
 
     /**
      * Search for teams by name

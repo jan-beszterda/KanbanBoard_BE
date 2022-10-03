@@ -24,9 +24,8 @@ public class BoardController {
         return boardService.getBoardById(id);
     }
 
-    /* Put mapping */
-    @GetMapping("/move/{board_id}/{column_id}/{new_index}")
-    public Board moveColumn(@PathVariable("board_id") Long boardId, @PathVariable("column_id") Long columnId, @PathVariable("new_index") int index) {
+    @PutMapping("/{board_id}/move_column/{column_id}")
+    public Board moveColumn(@PathVariable("board_id") Long boardId, @PathVariable("column_id") Long columnId, @RequestParam("to_position") Integer index) {
         return boardService.moveColumn(boardId, columnId, index);
     }
 

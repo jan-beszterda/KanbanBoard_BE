@@ -1,7 +1,6 @@
 package com.grupp3.ooad_projekt_backend.api;
 
 import com.grupp3.ooad_projekt_backend.models.Column;
-import com.grupp3.ooad_projekt_backend.service.BoardService;
 import com.grupp3.ooad_projekt_backend.service.ColumnService;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +11,6 @@ import java.util.List;
 public class ColumnController {
 
     private ColumnService columnService;
-    private BoardService boardService;
 
     public ColumnController(ColumnService columnService) {
         this.columnService = columnService;

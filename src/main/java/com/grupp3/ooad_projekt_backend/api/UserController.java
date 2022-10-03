@@ -67,8 +67,8 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @GetMapping("/accept/{user_id}/{team_id}")
-    public Team acceptInvite(@PathVariable("user_id") Long userId, @PathVariable("team_id") Long teamId){
+    @PutMapping("{user_id}/accept_team_invite")
+    public Team acceptInvite(@PathVariable("user_id") Long userId, @RequestParam("team_id") Long teamId){
         return userService.acceptInvite(userId, teamId);
     }
 
