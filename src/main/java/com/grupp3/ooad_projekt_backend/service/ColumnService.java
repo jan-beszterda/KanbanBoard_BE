@@ -66,11 +66,12 @@ public class ColumnService {
         Card cardToMove = maybeCard.get();
 
         columnFrom.getCardList().remove(cardToMove);
+        if (null == columnTo.getCardList()) {
+            columnTo.setCardList(new ArrayList<>());
+        }
         columnTo.getCardList().add(cardToMove);
-
         columnDAO.saveColumn(columnFrom);
         columnDAO.saveColumn(columnTo);
-
     }
     
     public void removeColumnById(Long id) {

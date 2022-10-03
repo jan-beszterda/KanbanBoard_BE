@@ -1,15 +1,11 @@
 package com.grupp3.ooad_projekt_backend.api;
 
-import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Team;
-import com.grupp3.ooad_projekt_backend.models.User;
 import com.grupp3.ooad_projekt_backend.service.TeamService;
-import com.grupp3.ooad_projekt_backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -18,7 +14,6 @@ import java.util.Optional;
 public class TeamController {
 
     private final TeamService teamService;
-    private final UserService userService;
 
     /**
      * Search for teams by name
@@ -26,8 +21,8 @@ public class TeamController {
      * @return list of teams
      */
 
-    @GetMapping("/search_name/{team_name}")
-    public List<Team> getTeamsByName(@PathVariable("team_name") String teamName) {
+    @GetMapping("/get_by_name")
+    public List<Team> getTeamsByName(@RequestParam("team_name") String teamName) {
         return teamService.getTeamsByName(teamName);
     }
 
@@ -45,18 +40,18 @@ public class TeamController {
      * Returns "is invited" or "could not be invited".
      * @return string
      */
-    @PutMapping("{team_id}/invite")
+    @PutMapping("{team_id}/invite_user")
     public String inviteUserToTeam(@PathVariable("team_id") Long teamId, @RequestParam("user_id") Long userId) {
         return teamService.inviteUserToTeam(teamId, userId);
     }
 
     @PostMapping
-    public Team createTeam(@RequestParam("userId") Long userId, @RequestBody Team team) {
+    public Team createTeam(@RequestParam("creator_id") Long userId, @RequestBody Team team) {
         return teamService.addTeam(userId, team);
     }
 
-    @GetMapping
-    public List<Team> getTeamsByMemberId(@RequestParam("userId") Long userId) {
+    @GetMapping("/for_user")
+    public List<Team> getTeamsByMemberId(@RequestParam("user_id") Long userId) {
         return teamService.getTeamsByMemberId(userId);
     }
 }

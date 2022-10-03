@@ -21,14 +21,13 @@ public class CommentController {
         return commentService.getAllComments();
     }
 
-    @GetMapping("/{id}")
-    public Comment getCommentById(@PathVariable("id") Long id) {
+    @GetMapping("/{comment_id}")
+    public Comment getCommentById(@PathVariable("comment_id") Long id) {
         return commentService.getCommentById(id);
     }
 
     @PostMapping("/create")
-    public Comment addComment(@RequestParam("user_id") Long userId, @RequestParam("card_id") Long cardId, @RequestBody Comment comment) {
+    public Comment addComment(@RequestParam("creator_id") Long userId, @RequestParam("card_id") Long cardId, @RequestBody Comment comment) {
         return commentService.addComment(userId, cardId, comment);
     }
-
 }

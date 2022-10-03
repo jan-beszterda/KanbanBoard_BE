@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/api/user")
 @AllArgsConstructor
@@ -36,8 +35,8 @@ public class UserController {
      * @param userName    Name of the users to get information on
      * @return user or null     user object or null if the user cannot be found
      */
-    @GetMapping("/searchName/{name}")
-    public List<User> getUsersByName(@PathVariable("name") String userName) {
+    @GetMapping("/get_by_username")
+    public List<User> getUsersByName(@RequestParam("username") String userName) {
         return userService.getUsersByName(userName);
     }
 
@@ -46,8 +45,8 @@ public class UserController {
      * @param userEmail    Name of the users to get information on
      * @return user or null     user object or null if the user cannot be found
      */
-    @GetMapping("/searchName/{email}")
-    public List<User> getUsersByEmail(@PathVariable("email") String userEmail) {
+    @GetMapping("/get_by_email")
+    public List<User> getUsersByEmail(@RequestParam("email") String userEmail) {
         return userService.getUsersByEmail(userEmail);
     }
 
@@ -67,8 +66,8 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @GetMapping("/accept/{user_id}/{team_id}")
-    public Team acceptInvite(@PathVariable("user_id") Long userId, @PathVariable("team_id") Long teamId){
+    @PutMapping("{user_id}/accept_team_invite")
+    public Team acceptInvite(@PathVariable("user_id") Long userId, @RequestParam("team_id") Long teamId){
         return userService.acceptInvite(userId, teamId);
     }
 

@@ -19,25 +19,24 @@ public class BoardController {
         return boardService.getAllBoards();
     }
 
-    @GetMapping("/{id}")
-    public Board getBoardById(@PathVariable("id") Long id) {
-        return boardService.getBoardById(id);
+    @GetMapping("/{board_id}")
+    public Board getBoardById(@PathVariable("board_id") Long board_id) {
+        return boardService.getBoardById(board_id);
     }
 
-    /* Put mapping */
-    @GetMapping("/move/{board_id}/{column_id}/{new_index}")
-    public Board moveColumn(@PathVariable("board_id") Long boardId, @PathVariable("column_id") Long columnId, @PathVariable("new_index") int index) {
+    @PutMapping("/{board_id}/move_column/{column_id}")
+    public Board moveColumn(@PathVariable("board_id") Long boardId, @PathVariable("column_id") Long columnId, @RequestParam("to_position") Integer index) {
         return boardService.moveColumn(boardId, columnId, index);
     }
 
     @PostMapping("/create")
-    public Board createBoard(@RequestParam("team_id") Long teamId, @RequestBody Board board) {
+    public Board createBoard(@RequestParam("owner_team") Long teamId, @RequestBody Board board) {
         return boardService.addBoard(teamId, board);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteBoardById(@PathVariable("id") Long id) {
-        boardService.removeBoardById(id);
+    @DeleteMapping("/{board_id}")
+    public void deleteBoardById(@PathVariable("board_id") Long boardId) {
+        boardService.removeBoardById(boardId);
     }
 
     @GetMapping("/forTeam")

@@ -1,7 +1,6 @@
 package com.grupp3.ooad_projekt_backend.api;
 
 import com.grupp3.ooad_projekt_backend.models.Column;
-import com.grupp3.ooad_projekt_backend.service.BoardService;
 import com.grupp3.ooad_projekt_backend.service.ColumnService;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +11,6 @@ import java.util.List;
 public class ColumnController {
 
     private ColumnService columnService;
-    private BoardService boardService;
 
     public ColumnController(ColumnService columnService) {
         this.columnService = columnService;
@@ -23,8 +21,8 @@ public class ColumnController {
         return columnService.getAllColumns();
     }
 
-    @GetMapping("/{id}")
-    public Column getColumnById(@PathVariable("id") Long id) {
+    @GetMapping("/{column_id}")
+    public Column getColumnById(@PathVariable("column_id") Long id) {
         return columnService.getColumnById(id);
     }
 
@@ -33,8 +31,8 @@ public class ColumnController {
         return columnService.addColumn(boardId, column);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteColumnById(@PathVariable("id") Long id) {
+    @DeleteMapping("/{column_id}")
+    public void deleteColumnById(@PathVariable("column_id") Long id) {
         columnService.removeColumnById(id);
     }
 }

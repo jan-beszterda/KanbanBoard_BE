@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/card")
 public class CardController {
+
     private CardService cardService;
     private ColumnService columnService;
 
@@ -23,25 +24,25 @@ public class CardController {
         return cardService.getAllCards();
     }
 
-    @GetMapping("/{id}")
-    public Card getCardById(@PathVariable("id") Long id) {
+    @GetMapping("/{card_id}")
+    public Card getCardById(@PathVariable("card_id") Long id) {
         return cardService.getCardById(id);
     }
 
     @PostMapping("/create")
-    public Card addCard(@RequestParam("user_id") Long userId, @RequestParam("column_id") Long columnId, @RequestBody Card card) {
+    public Card addCard(@RequestParam("creator_id") Long userId, @RequestParam("column_id") Long columnId, @RequestBody Card card) {
         return cardService.addCard(userId, columnId, card);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteCardById(@PathVariable("id") Long id) {
+    @DeleteMapping("/{card_id}")
+    public void deleteCardById(@PathVariable("card_id") Long id) {
         cardService.removeCardById(id);
     }
 
 
-    @PutMapping("/{cardId}/moveFrom/{columnId1}/to/{columnId2}")
-    public void moveCard(@PathVariable("cardId") Long cardId, @PathVariable("columnId1") Long columnId1,
-                         @PathVariable("columnId2") Long columnId2) {
+    @PutMapping("/{card_id}/move")
+    public void moveCard(@PathVariable("card_id") Long cardId, @RequestParam("from") Long columnId1,
+                         @RequestParam("to") Long columnId2) {
         columnService.moveCard(cardId, columnId1, columnId2);
     }
 

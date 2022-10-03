@@ -58,13 +58,19 @@ public class BoardService {
 
     public Board moveColumn(Long boardId, Long columnId, int index) {
         Optional<Board> maybeBoard = boardDAO.findBoardById(boardId);
-        if(maybeBoard.isEmpty()){ return null;}
+        if(maybeBoard.isEmpty()) {
+            return null;
+        }
         Board board = maybeBoard.get();
-
         List<Column> columnList = board.getColumnList();
-        Column column = columnList.stream().filter(p -> p.getColumnId() == columnId).toList().get(0);
-        if(column == null){ return null;}
-
+        Column column = columnList
+                .stream()
+                .filter(p -> p.getColumnId() == columnId)
+                .toList()
+                .get(0);
+        if (column == null){
+            return null;
+        }
         columnList.remove(column);
         columnList.add(index, column);
         board.setColumnList(columnList);
