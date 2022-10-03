@@ -8,22 +8,22 @@ import java.util.List;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long boardId;
     private String boardName;
     private String boardDescription;
-
-    @OneToMany(mappedBy="board")
+    @OneToMany
+    @JoinColumn(name="boardId")
     private List<Column> columnList;
 
     public Board() {
     }
 
     public Long getId() {
-        return id;
+        return boardId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.boardId = id;
     }
 
     public String getBoardName() {

@@ -27,8 +27,8 @@ public class CommentController {
     }
 
     @PostMapping("/create")
-    public Comment addComment(@RequestBody Comment comment) {
-        return commentService.addComment(comment);
+    public Comment addComment(@RequestParam("user_id") Long userId, @RequestParam("card_id") Long cardId, @RequestBody Comment comment) {
+        return commentService.addComment(userId, cardId, comment);
     }
 
 }

@@ -1,7 +1,5 @@
 package com.grupp3.ooad_projekt_backend.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -26,6 +24,7 @@ public class Team {
             inverseJoinColumns = @JoinColumn(name = "userId"))
     private List<User> invited;
     @OneToMany
+    @JoinColumn(name = "teamId")
     private List<Board> boards;
 
     public Team() {

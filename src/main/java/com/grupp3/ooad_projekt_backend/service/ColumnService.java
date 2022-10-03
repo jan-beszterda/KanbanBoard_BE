@@ -1,5 +1,6 @@
 package com.grupp3.ooad_projekt_backend.service;
 
+import com.grupp3.ooad_projekt_backend.dao.BoardDAO;
 import com.grupp3.ooad_projekt_backend.dao.CardDAO;
 import com.grupp3.ooad_projekt_backend.dao.ColumnDAO;
 import com.grupp3.ooad_projekt_backend.models.Card;
@@ -7,6 +8,7 @@ import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Column;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +17,12 @@ public class ColumnService {
 
     final private ColumnDAO columnDAO;
     final private CardDAO cardDAO;
+    private BoardDAO boardDAO;
 
-    public ColumnService(ColumnDAO columnDAO, CardDAO cardDAO) {
+    public ColumnService(ColumnDAO columnDAO, CardDAO cardDAO, BoardDAO boardDAO) {
         this.columnDAO = columnDAO;
         this.cardDAO = cardDAO;
+        this.boardDAO = boardDAO;
     }
 
     public List<Column> getAllColumns() {
@@ -29,7 +33,16 @@ public class ColumnService {
         return columnDAO.findColumnById(id).orElse(null);
     }
 
-    public Column addColumn(Column column) {
+    public Column addColumn(Long boardId, Column column) {
+        Optional<Board> maybeBoard = boardDAO.findBoardById(boardId);
+        if (maybeBoard.isEmpty()) {
+            return null;
+        }
+        Board board = maybeBoard.get();
+        if (null == board.getColumnList()) {
+            board.setColumnList(new ArrayList<>());
+        }
+        board.getColumnList().add(column);
         return columnDAO.saveColumn(column);
     }
 

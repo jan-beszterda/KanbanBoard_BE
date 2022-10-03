@@ -24,13 +24,14 @@ public class BoardController {
         return boardService.getBoardById(id);
     }
 
+    /* Put mapping */
     @GetMapping("/move/{board_id}/{column_id}/{new_index}")
     public Board moveColumn(@PathVariable("board_id") Long boardId, @PathVariable("column_id") Long columnId, @PathVariable("new_index") int index) {
         return boardService.moveColumn(boardId, columnId, index);
     }
 
-    @PostMapping("/{teamId}/create")
-    public Board createBoard(@PathVariable("teamId") Long teamId, @RequestBody Board board) {
+    @PostMapping("/create")
+    public Board createBoard(@RequestParam("team_id") Long teamId, @RequestBody Board board) {
         return boardService.addBoard(teamId, board);
     }
 
@@ -39,8 +40,8 @@ public class BoardController {
         boardService.removeBoardById(id);
     }
 
-    @GetMapping("/team")
-    public List<Board> getBoardsByTeamId(@RequestParam(value = "team") String id) {
-        return boardService.getBoardByTeamId(Long.parseLong(id));
+    @GetMapping("/forTeam")
+    public List<Board> getBoardsByTeamId(@RequestParam(value = "team_id") Long id) {
+        return boardService.getBoardByTeamId(id);
     }
 }

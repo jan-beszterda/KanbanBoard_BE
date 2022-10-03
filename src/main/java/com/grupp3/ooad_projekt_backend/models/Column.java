@@ -10,12 +10,8 @@ public class Column {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long columnId;
     private String columnTitle;
-
-    @ManyToOne
-    @JoinColumn(name="board_id", nullable = false)
-    private Board board;
-
     @OneToMany
+    @JoinColumn(name = "columnId")
     private List<Card> cardList;
 
     public Column() {
@@ -44,8 +40,4 @@ public class Column {
     public void setCardList(List<Card> cardList) {
         this.cardList = cardList;
     }
-
-    public Board getBoard() { return board; }
-
-    public void setBoard(Board board) { this.board = board; }
 }
