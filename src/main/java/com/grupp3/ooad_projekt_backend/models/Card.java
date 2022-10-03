@@ -8,10 +8,11 @@ import java.util.List;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long cardId;
     private String cardTitle;
     private String cardText;
     @OneToMany
+    @JoinColumn(name = "cardId")
     private List<Comment> comments;
     @OneToOne
     private User author;
@@ -19,12 +20,12 @@ public class Card {
     public Card() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getCardId() {
+        return cardId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCardId(Long id) {
+        this.cardId = id;
     }
 
     public String getCardTitle() {
@@ -58,4 +59,6 @@ public class Card {
     public void setAuthor(User author) {
         this.author = author;
     }
+
+
 }

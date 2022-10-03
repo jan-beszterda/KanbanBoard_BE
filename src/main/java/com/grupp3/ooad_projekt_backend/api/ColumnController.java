@@ -1,17 +1,14 @@
 package com.grupp3.ooad_projekt_backend.api;
 
-import com.grupp3.ooad_projekt_backend.models.Board;
-import com.grupp3.ooad_projekt_backend.models.Card;
 import com.grupp3.ooad_projekt_backend.models.Column;
 import com.grupp3.ooad_projekt_backend.service.BoardService;
-import com.grupp3.ooad_projekt_backend.service.CardService;
 import com.grupp3.ooad_projekt_backend.service.ColumnService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Column")
+@RequestMapping("/api/column")
 public class ColumnController {
 
     private ColumnService columnService;
@@ -32,8 +29,8 @@ public class ColumnController {
     }
 
     @PostMapping("/create")
-    public Column addColumn(@RequestBody Column column) {
-        return columnService.addColumn(column);
+    public Column addColumn(@RequestParam("board_id") Long boardId, @RequestBody Column column) {
+        return columnService.addColumn(boardId, column);
     }
 
     @DeleteMapping("/{id}")
