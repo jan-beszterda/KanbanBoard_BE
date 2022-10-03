@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/card")
 public class CardController {
+
     private CardService cardService;
     private ColumnService columnService;
 
@@ -23,18 +24,18 @@ public class CardController {
         return cardService.getAllCards();
     }
 
-    @GetMapping("/{id}")
-    public Card getCardById(@PathVariable("id") Long id) {
+    @GetMapping("/{card_id}")
+    public Card getCardById(@PathVariable("card_id") Long id) {
         return cardService.getCardById(id);
     }
 
     @PostMapping("/create")
-    public Card addCard(@RequestParam("user_id") Long userId, @RequestParam("column_id") Long columnId, @RequestBody Card card) {
+    public Card addCard(@RequestParam("creator_id") Long userId, @RequestParam("column_id") Long columnId, @RequestBody Card card) {
         return cardService.addCard(userId, columnId, card);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteCardById(@PathVariable("id") Long id) {
+    @DeleteMapping("/{card_id}")
+    public void deleteCardById(@PathVariable("card_id") Long id) {
         cardService.removeCardById(id);
     }
 
