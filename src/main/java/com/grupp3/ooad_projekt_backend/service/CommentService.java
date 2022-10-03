@@ -8,6 +8,8 @@ import com.grupp3.ooad_projekt_backend.models.Comment;
 import com.grupp3.ooad_projekt_backend.models.User;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +42,7 @@ public class CommentService {
         }
         User user = maybeUser.get();
         comment.setUser(user);
+        comment.setPublishedOn(LocalDateTime.now());
         Optional<Card> maybeCard = cardDAO.findCardById(cardId);
         if(maybeCard.isEmpty()) {
             return null;
