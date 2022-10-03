@@ -1,6 +1,7 @@
 package com.grupp3.ooad_projekt_backend.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,7 +18,7 @@ public class User {
     private String userName;
     private String firstName;
     private String lastName;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String email;
     @ManyToMany(mappedBy = "teamMembers")

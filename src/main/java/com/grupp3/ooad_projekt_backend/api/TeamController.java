@@ -45,36 +45,18 @@ public class TeamController {
      * Returns "is invited" or "could not be invited".
      * @return string
      */
-    @GetMapping("invite/{user_id}/{team_id}")
-    public String inviteUserToTeam(@PathVariable("user_id") Long teamId, @PathVariable("team_id") Long userId) {
-        Team team = teamService.getTeamById(teamId);
-        if (team == null){
-            return "Team could not be found.";
-        }
-
-        Optional<User> maybeUser = userService.getUserById(userId);
-        if (maybeUser.isEmpty()){
-            return "User could not be found.";
-        }
-        User user = maybeUser.get();
-
-        team.getTeamMembers().add(user);
-
-        return "User" + user.getUserName() + " is invited to team " + team.getTeamName();
-    }
-
-    @PostMapping("/new")
-    public Team createTeam(@RequestBody Team newTeam) {
-        return teamService.newTeam(newTeam);
+    @PutMapping("{team_id}/invite")
+    public String inviteUserToTeam(@PathVariable("team_id") Long teamId, @RequestParam("user_id") Long userId) {
+        return teamService.inviteUserToTeam(teamId, userId);
     }
 
     @PostMapping
-    public Team createTeam(@CookieValue(name = "userId") Long id, @RequestBody Team team) {
-        return teamService.addTeam(id, team);
+    public Team createTeam(@RequestParam("userId") Long userId, @RequestBody Team team) {
+        return teamService.addTeam(userId, team);
     }
 
     @GetMapping
-    public List<Team> getTeamsByMemberId(@CookieValue(name = "userId") Long userId) {
+    public List<Team> getTeamsByMemberId(@RequestParam("userId") Long userId) {
         return teamService.getTeamsByMemberId(userId);
     }
 }
