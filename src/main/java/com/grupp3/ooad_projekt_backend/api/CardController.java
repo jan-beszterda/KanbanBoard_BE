@@ -39,9 +39,9 @@ public class CardController {
     }
 
 
-    @PutMapping("/{cardId}/moveFrom/{columnId1}/to/{columnId2}")
-    public void moveCard(@PathVariable("cardId") Long cardId, @PathVariable("columnId1") Long columnId1,
-                         @PathVariable("columnId2") Long columnId2) {
+    @PutMapping("/{card_id}/move")
+    public void moveCard(@PathVariable("card_id") Long cardId, @RequestParam("from") Long columnId1,
+                         @RequestParam("to") Long columnId2) {
         columnService.moveCard(cardId, columnId1, columnId2);
     }
 
