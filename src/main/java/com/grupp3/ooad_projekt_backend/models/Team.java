@@ -10,20 +10,20 @@ import java.util.List;
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long teamId;
     private String teamName;
     private String teamDescription;
     @ManyToMany
     @JoinTable(
             name = "team_members",
-            joinColumns = @JoinColumn(name = "team_id"),
-            inverseJoinColumns = @JoinColumn(name = "member_id"))
+            joinColumns = @JoinColumn(name = "teamId"),
+            inverseJoinColumns = @JoinColumn(name = "userId"))
     private List<User> teamMembers;
     @ManyToMany
     @JoinTable(
             name = "invitees",
-            joinColumns = @JoinColumn(name = "team_id"),
-            inverseJoinColumns = @JoinColumn(name = "invitee_id"))
+            joinColumns = @JoinColumn(name = "teamId"),
+            inverseJoinColumns = @JoinColumn(name = "userId"))
     private List<User> invited;
     @OneToMany
     private List<Board> boards;
@@ -32,29 +32,19 @@ public class Team {
     }
 
     public Long getId() {
-        return id;
+        return teamId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.teamId = id;
     }
 
     public String getTeamName() {
         return teamName;
     }
 
-    public List<User> getMembers() {
-        return teamMembers;
-    }
-
     public void setTeamName(String teamName) {
         this.teamName = teamName;
-    }
-
-
-    public void addInvited(User user) {
-        if(this.invited.contains(user)) return;
-        this.invited.add(user);
     }
 
     public String getTeamDescription() {
@@ -73,16 +63,19 @@ public class Team {
         this.teamMembers = teamMembers;
     }
 
+    public List<User> getInvited() {
+        return invited;
+    }
+
+    public void setInvited(List<User> invited) {
+        this.invited = invited;
+    }
+
     public List<Board> getBoards() {
         return boards;
     }
 
     public void setBoards(List<Board> boards) {
         this.boards = boards;
-    }
-
-    public void addMember(User user) {
-        this.invited.remove(user);
-        this.teamMembers.add(user);
     }
 }

@@ -31,7 +31,7 @@ public class TeamDAO {
     }
     
      public Team addMember(Team team, User user) {
-        team.addMember(user);
+        team.getTeamMembers().add(user);
         return teamRepository.save(team);
     }
 }
