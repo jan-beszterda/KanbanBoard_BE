@@ -75,7 +75,7 @@ public class TeamService {
         team.getInvited().add(user);
         teamDAO.addTeam(team);
 
-        return "User " + user.getUserName() + " is invited to team " + team.getTeamName();
+        return "User " + user.getEmail() + " is invited to team " + team.getTeamName();
     }
 }
 

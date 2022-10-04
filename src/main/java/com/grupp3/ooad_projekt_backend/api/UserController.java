@@ -30,15 +30,6 @@ public class UserController {
         return user.get();
     }
 
-    /**
-     * Returns a list of users information by name
-     * @param userName    Name of the users to get information on
-     * @return user or null     user object or null if the user cannot be found
-     */
-    @GetMapping("/get_by_username")
-    public List<User> getUsersByName(@RequestParam("username") String userName) {
-        return userService.getUsersByName(userName);
-    }
 
     /**
      * Returns a list of users information by email
