@@ -15,7 +15,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-    private String userName;
     private String firstName;
     private String lastName;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -41,14 +40,6 @@ public class User {
 
     public void setUserId(Long id) {
         this.userId = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getFirstName() {
