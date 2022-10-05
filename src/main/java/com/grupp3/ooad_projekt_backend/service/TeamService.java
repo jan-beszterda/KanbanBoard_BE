@@ -80,11 +80,11 @@ public class TeamService {
 
     public String leaveTeam(Long teamId, Long userId) {
         Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);
-        if (maybeTeam.isEmpty()) return "No such team.";
+        if (maybeTeam.isEmpty()) return "Team could not be found.";
         Team team = maybeTeam.get();
 
         Optional<User> maybeUser = userDAO.getUserById(userId);
-        if (maybeUser.isEmpty()) return "No such user.";
+        if (maybeUser.isEmpty()) return "User could not be found.";
         User user = maybeUser.get();
 
         List<User> members = team.getTeamMembers();
@@ -92,11 +92,8 @@ public class TeamService {
         if(!members.contains(user)) return "User is not member of team.";
 
         members.remove(user);
-
         team.setTeamMembers(members);
-
         teamDAO.saveTeam(team);
-
         return "You have left the team.";
 
 

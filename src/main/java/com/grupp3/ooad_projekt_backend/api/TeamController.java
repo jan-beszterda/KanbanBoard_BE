@@ -46,7 +46,7 @@ public class TeamController {
     }
 
     /**
-     * Returns "is invited" or "could not be invited".
+     * Removes user from team by id.
      * @return string
      */
     @PutMapping("{team_id}/leave")
