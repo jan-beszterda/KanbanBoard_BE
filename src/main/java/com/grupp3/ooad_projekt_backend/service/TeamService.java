@@ -12,8 +12,8 @@ import java.util.Optional;
 
 @Service
 public class TeamService {
-    private TeamDAO teamDAO;
-    private UserDAO userDAO;
+    private final TeamDAO teamDAO;
+    private final UserDAO userDAO;
 
     public TeamService(TeamDAO teamDAO, UserDAO userDAO) {
         this.teamDAO = teamDAO;
@@ -76,6 +76,30 @@ public class TeamService {
         teamDAO.addTeam(team);
 
         return "User " + user.getEmail() + " is invited to team " + team.getTeamName();
+    }
+
+    public String leaveTeam(Long teamId, Long userId) {
+        Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);
+        if (maybeTeam.isEmpty()) return "No such team.";
+        Team team = maybeTeam.get();
+
+        Optional<User> maybeUser = userDAO.getUserById(userId);
+        if (maybeUser.isEmpty()) return "No such user.";
+        User user = maybeUser.get();
+
+        List<User> members = team.getTeamMembers();
+
+        if(!members.contains(user)) return "User is not member of team.";
+
+        members.remove(user);
+
+        team.setTeamMembers(members);
+
+        teamDAO.saveTeam(team);
+
+        return "You have left the team.";
+
+
     }
 }
 

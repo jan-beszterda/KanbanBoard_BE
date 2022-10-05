@@ -34,5 +34,9 @@ public class TeamDAO {
         team.getTeamMembers().add(user);
         return teamRepository.save(team);
     }
+
+    public void saveTeam(Team team) {
+        teamRepository.save(team);
+    }
 }
 

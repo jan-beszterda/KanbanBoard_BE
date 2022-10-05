@@ -45,6 +45,15 @@ public class TeamController {
         return teamService.inviteUserToTeam(teamId, userId);
     }
 
+    /**
+     * Returns "is invited" or "could not be invited".
+     * @return string
+     */
+    @PutMapping("{team_id}/leave")
+    public String leaveTeam(@PathVariable("team_id") Long teamId, @RequestParam("user_id") Long userId) {
+        return teamService.leaveTeam(teamId, userId);
+    }
+
     @PostMapping
     public Team createTeam(@RequestParam("creator_id") Long userId, @RequestBody Team team) {
         return teamService.addTeam(userId, team);
