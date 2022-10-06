@@ -46,20 +46,7 @@ public class UserService {
         return null;
     }
 
-    public Team denyInvite(Long userId, Long teamId) {
-        Optional<User> maybeUser = userDAO.getUserById(userId);
-        Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);
-        if (maybeUser.isEmpty() || maybeTeam.isEmpty()) {
-            return null;
-        }
-        User user = maybeUser.get();
-        Team team = maybeTeam.get();
-        if (user.getInvitations().contains(team)) {
-            team.getInvited().remove(user);
-            teamDAO.saveTeam(team);
-        }
-        return null;
-    }
+
 
     public List<User> getUsersByEmail(String userEmail) {
         return userDAO.getAllUsers().stream().filter(p -> p.getEmail().equals(userEmail)).toList();
@@ -69,7 +56,20 @@ public class UserService {
         userDAO.removeUser(id);
     }
 
-
+    public Team denyInvite(Long userId, Long teamId) {
+        Optional<User> maybeUser = userDAO.getUserById(userId);
+        Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);
+        if (maybeUser.isEmpty() || maybeTeam.isEmpty()) {
+            return null;
+        }
+        User user = maybeUser.get();
+        Team team = maybeTeam.get();
+        if (user.getInvitations().contains(team)) {
+            user.getInvitations().remove(team);
+            userDAO.save(user);
+        }
+        return null;
+    }
 }
 
 
