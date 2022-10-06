@@ -48,8 +48,10 @@ public class UserService {
 
 
 
-    public List<User> getUsersByEmail(String userEmail) {
-        return userDAO.getAllUsers().stream().filter(p -> p.getEmail().equals(userEmail)).toList();
+    public User getUserByEmail(String userEmail) {
+        List<User> users = userDAO.getAllUsers().stream().filter(p -> p.getEmail().equals(userEmail)).toList();
+        if(users.size() == 0) return null;
+        return users.get(0);
     }
 
     public void removeUser(Long id) {
