@@ -43,4 +43,9 @@ public class BoardController {
     public List<Board> getBoardsByTeamId(@RequestParam(value = "team_id") Long id) {
         return boardService.getBoardByTeamId(id);
     }
+
+    @PutMapping("/{board_id}/remove_column")
+    public Board removeColumnFromBoard(@PathVariable("board_id") Long boardId, @RequestParam("column_id") Long columnId) {
+        return boardService.removeColumnFromBoard(boardId, columnId);
+    }
 }

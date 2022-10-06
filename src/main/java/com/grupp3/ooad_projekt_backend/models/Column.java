@@ -10,7 +10,7 @@ public class Column {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long columnId;
     private String columnTitle;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "columnId")
     private List<Card> cardList;
 

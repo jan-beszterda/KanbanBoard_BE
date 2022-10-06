@@ -11,7 +11,7 @@ public class Board {
     private Long boardId;
     private String boardName;
     private String boardDescription;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="boardId")
     private List<Column> columnList;
 

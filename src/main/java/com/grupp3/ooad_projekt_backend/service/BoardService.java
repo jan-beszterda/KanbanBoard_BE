@@ -1,6 +1,7 @@
 package com.grupp3.ooad_projekt_backend.service;
 
 import com.grupp3.ooad_projekt_backend.dao.BoardDAO;
+import com.grupp3.ooad_projekt_backend.dao.ColumnDAO;
 import com.grupp3.ooad_projekt_backend.dao.TeamDAO;
 import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Column;
@@ -15,9 +16,11 @@ import java.util.Optional;
 public class BoardService {
     final private BoardDAO boardDAO;
     final private TeamDAO teamDAO;
-    public BoardService(BoardDAO boardDAO, TeamDAO teamDAO) {
+    private ColumnDAO columnDAO;
+    public BoardService(BoardDAO boardDAO, TeamDAO teamDAO, ColumnDAO columnDAO) {
         this.boardDAO = boardDAO;
         this.teamDAO = teamDAO;
+        this.columnDAO = columnDAO;
     }
 
     public List<Board> getAllBoards() {
@@ -74,6 +77,23 @@ public class BoardService {
         columnList.remove(column);
         columnList.add(index, column);
         board.setColumnList(columnList);
+        return boardDAO.saveBoard(board);
+    }
+
+    public Board removeColumnFromBoard(Long boardId, Long columnId) {
+        Optional<Board> maybeBoard = boardDAO.findBoardById(boardId);
+        if (maybeBoard.isEmpty()) {
+            return null;
+        }
+        Board board = maybeBoard.get();
+
+        Optional<Column> maybeColumn = columnDAO.findColumnById(columnId);
+        if (maybeColumn.isEmpty()) {
+            return null;
+        }
+        Column column = maybeColumn.get();
+
+        board.getColumnList().remove(column);
         return boardDAO.saveBoard(board);
     }
 }
