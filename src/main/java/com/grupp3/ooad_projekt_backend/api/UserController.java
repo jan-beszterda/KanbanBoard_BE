@@ -62,6 +62,11 @@ public class UserController {
         return userService.acceptInvite(userId, teamId);
     }
 
+    @PutMapping("{user_id}/deny_team_invite")
+    public Team denyInvite(@PathVariable("user_id") Long userId, @RequestParam("team_id") Long teamId){
+        return userService.denyInvite(userId, teamId);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteUserAccount(@PathVariable("id") Long id) {
         userService.removeUser(id);
