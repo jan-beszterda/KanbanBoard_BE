@@ -37,8 +37,8 @@ public class UserController {
      * @return user or null     user object or null if the user cannot be found
      */
     @GetMapping("/get_by_email")
-    public List<User> getUsersByEmail(@RequestParam("email") String userEmail) {
-        return userService.getUsersByEmail(userEmail);
+    public User getUserByEmail(@RequestParam("email") String userEmail) {
+        return userService.getUserByEmail(userEmail);
     }
 
 
