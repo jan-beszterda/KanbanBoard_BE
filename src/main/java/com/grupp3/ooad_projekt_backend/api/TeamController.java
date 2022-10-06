@@ -41,8 +41,9 @@ public class TeamController {
      * @return string
      */
     @PutMapping("{team_id}/invite_user")
-    public String inviteUserToTeam(@PathVariable("team_id") Long teamId, @RequestParam("user_id") Long userId) {
-        return teamService.inviteUserToTeam(teamId, userId);
+    //changed parameter to user_email
+    public String inviteUserToTeam(@PathVariable("team_id") Long teamId, @RequestParam("user_email") String userEmail) {
+        return teamService.inviteUserToTeam(teamId, userEmail);
     }
 
     /**

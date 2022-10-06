@@ -48,5 +48,9 @@ public class UserDAO {
     public void removeUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    public List<User> getUserByEmail(String userEmail) {
+        return userRepository.findAll().stream().filter(user -> user.getEmail().equals(userEmail)).toList();
+    }
 }
 

@@ -55,18 +55,22 @@ public class TeamService {
                 .toList();
     }
 
-    public String inviteUserToTeam(Long teamId, Long userId) {
+    public String inviteUserToTeam(Long teamId, String userEmail) {
         Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);
         if (maybeTeam.isEmpty()){
             return "Team could not be found.";
         }
 
-        Optional<User> maybeUser = userDAO.getUserById(userId);
-        if (maybeUser.isEmpty()){
+        List<User> maybeUsers = userDAO.getUserByEmail(userEmail);
+        if (maybeUsers.isEmpty()){
             return "User could not be found.";
         }
 
-        User user = maybeUser.get();
+        if (maybeUsers.size() > 1){
+            return "Found more than one user. Contact your Admin.";
+        }
+
+        User user = maybeUsers.get(0);
         Team team = maybeTeam.get();
 
         if (null == team.getInvited()) {

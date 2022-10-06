@@ -34,6 +34,8 @@ public class User {
         return invitations;
     }
 
+    public void setInvitations(List<Team> invitations) { this.invitations = invitations; }
+
     public Long getUserId() {
         return userId;
     }
