@@ -76,6 +76,11 @@ public class TeamService {
         if (null == team.getInvited()) {
             team.setInvited(new ArrayList<>());
         }
+
+        if (team.getInvited().contains(user)){
+            return "User is already invited to this team.";
+        }
+
         team.getInvited().add(user);
         teamDAO.addTeam(team);
 
