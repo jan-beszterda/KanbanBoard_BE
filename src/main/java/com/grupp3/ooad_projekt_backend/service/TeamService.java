@@ -105,6 +105,28 @@ public class TeamService {
         teamDAO.saveTeam(team);
         return "You have left the team.";
 
+    }
+
+    public String editTeamName (Long teamId, String teamName){
+
+        if (teamName.equals("")){
+            return "Empty string";
+        }
+        else {
+            Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);
+            if (maybeTeam.isEmpty()) return "Team not found";
+
+            Team team = maybeTeam.get();
+            team.setTeamName(teamName);
+
+            teamDAO.saveTeam(team);
+
+            return "Edit success";
+
+        }
+
+
+
 
     }
 }

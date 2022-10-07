@@ -46,6 +46,12 @@ public class TeamController {
         return teamService.inviteUserToTeam(teamId, userEmail);
     }
 
+    @PutMapping("{team_id}/edit")
+    public String editTeamName(@PathVariable("team_id") Long teamId, @RequestParam String teamName){
+        return teamService.editTeamName(teamId,teamName);
+
+    }
+
     /**
      * Removes user from team by id.
      * @return string
