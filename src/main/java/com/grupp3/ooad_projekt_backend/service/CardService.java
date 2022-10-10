@@ -72,4 +72,19 @@ public class CardService {
     public void removeCardById(Long id) {
         cardDAO.removeCardById(id);
     }
+
+    public Card editCard(Long cardId, Card editedCard) {
+        Optional<Card> maybeCard = cardDAO.findCardById(cardId);
+        if (maybeCard.isEmpty()) {
+            return null;
+        }
+        Card card = maybeCard.get();
+        if (null != editedCard.getCardTitle() && !editedCard.getCardTitle().isEmpty()) {
+            card.setCardTitle(editedCard.getCardTitle());
+        }
+        if (null != editedCard.getCardText() && !editedCard.getCardText().isEmpty()) {
+            card.setCardText(editedCard.getCardText());
+        }
+        return cardDAO.saveCard(card);
+    }
 }

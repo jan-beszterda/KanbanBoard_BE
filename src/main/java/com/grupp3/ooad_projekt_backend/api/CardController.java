@@ -46,4 +46,8 @@ public class CardController {
         columnService.moveCard(cardId, columnId1, columnId2);
     }
 
+    @PutMapping("/{card_id}/edit")
+    public Card editCard(@PathVariable("card_id") Long cardId, @RequestBody Card editedCard) {
+        return cardService.editCard(cardId, editedCard);
+    }
 }
