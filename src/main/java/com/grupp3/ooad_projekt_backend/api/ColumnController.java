@@ -35,4 +35,10 @@ public class ColumnController {
     public void deleteColumnById(@PathVariable("column_id") Long id) {
         columnService.removeColumnById(id);
     }
+
+
+    @PutMapping("{column_id}/edit")
+    public String editColumnTitle(@PathVariable("column_id") Long columnId, @RequestParam String columnTitle) {
+        return columnService.editColumnTitle(columnId, columnTitle);
+    }
 }

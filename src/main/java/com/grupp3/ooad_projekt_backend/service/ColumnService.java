@@ -6,6 +6,7 @@ import com.grupp3.ooad_projekt_backend.dao.ColumnDAO;
 import com.grupp3.ooad_projekt_backend.models.Card;
 import com.grupp3.ooad_projekt_backend.models.Board;
 import com.grupp3.ooad_projekt_backend.models.Column;
+import com.grupp3.ooad_projekt_backend.models.Team;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,6 +77,24 @@ public class ColumnService {
     
     public void removeColumnById(Long id) {
         columnDAO.removeColumnById(id);
+    }
+
+    public String editColumnTitle (Long columnId, String columnTitle) {
+
+        if (columnTitle.equals("")) {
+            return "Empty string";
+        } else {
+            Optional<Column> maybeColumn = columnDAO.findColumnById(columnId);
+            if (maybeColumn.isEmpty()) return "Column not found";
+
+            Column column = maybeColumn.get();
+            column.setColumnTitle(columnTitle);
+
+            columnDAO.saveColumn(column);
+
+            return "Edit success";
+
+        }
     }
 }
 
