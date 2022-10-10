@@ -70,4 +70,9 @@ public class TeamController {
     public List<Team> getTeamsByMemberId(@RequestParam("user_id") Long userId) {
         return teamService.getTeamsByMemberId(userId);
     }
+
+    @GetMapping("/invitations/for_user")
+    public List<Team> getTeamInvitationsByMemberId(@RequestParam("user_id") Long userId) {
+        return teamService.getTeamInvitationsByMemberId(userId);
+    }
 }
