@@ -129,6 +129,13 @@ public class TeamService {
 
 
     }
+
+    public List<Team> getTeamInvitationsByMemberId(Long userId) {
+        return teamDAO.findAllTeams().stream()
+                .filter(team -> team.getInvited()   .stream()
+                        .anyMatch(user -> userId.equals(user.getUserId())))
+                .toList();
+    }
 }
 
 

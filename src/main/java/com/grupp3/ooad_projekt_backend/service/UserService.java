@@ -67,8 +67,10 @@ public class UserService {
         User user = maybeUser.get();
         Team team = maybeTeam.get();
         if (user.getInvitations().contains(team)) {
-            user.getInvitations().remove(team);
-            userDAO.save(user);
+            team.getInvited().remove(user);
+            teamDAO.saveTeam(team);
+            //user.getInvitations().remove(team);
+            //userDAO.save(user);
         }
         return null;
     }
