@@ -16,7 +16,7 @@ import java.util.Optional;
 public class BoardService {
     final private BoardDAO boardDAO;
     final private TeamDAO teamDAO;
-    private ColumnDAO columnDAO;
+    final private ColumnDAO columnDAO;
     public BoardService(BoardDAO boardDAO, TeamDAO teamDAO, ColumnDAO columnDAO) {
         this.boardDAO = boardDAO;
         this.teamDAO = teamDAO;
@@ -94,6 +94,10 @@ public class BoardService {
         Column column = maybeColumn.get();
 
         board.getColumnList().remove(column);
+        return boardDAO.saveBoard(board);
+    }
+
+    public Board updateBoard(Board board) {
         return boardDAO.saveBoard(board);
     }
 }

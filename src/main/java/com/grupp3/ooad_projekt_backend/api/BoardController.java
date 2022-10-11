@@ -34,6 +34,13 @@ public class BoardController {
         return boardService.addBoard(teamId, board);
     }
 
+    @PostMapping("/update")
+    public Board updateBoard(@RequestBody Board board) {
+        return boardService.updateBoard(board);
+    }
+
+
+
     @DeleteMapping("/{board_id}")
     public void deleteBoardById(@PathVariable("board_id") Long boardId) {
         boardService.removeBoardById(boardId);
