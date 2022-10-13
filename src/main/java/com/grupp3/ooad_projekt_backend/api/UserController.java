@@ -71,4 +71,9 @@ public class UserController {
     public void deleteUserAccount(@PathVariable("id") Long id) {
         userService.removeUser(id);
     }
+
+    @PutMapping("{user_id}/userNameEdit")
+    public void userNameChange(@PathVariable ("user_id") Long id, @RequestParam String newName){
+        userService.setUserName(id,newName);
+    }
 }

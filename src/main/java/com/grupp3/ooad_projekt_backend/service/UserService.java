@@ -77,6 +77,26 @@ public class UserService {
         }
         return null;
     }
+    public void setUserName(Long id, String newName) {
+
+        Optional<User> maybeUser = userDAO.getUserById(id);
+        if (maybeUser.isPresent()) {
+            User user = maybeUser.get();
+            if (newName.contains(" ")) {
+                String[] name = newName.split(" ", 2);
+                user.setFirstName(name[0]);
+                user.setLastName(name[1]);
+                userDAO.save(user);
+
+            } else {
+                user.setFirstName(newName);
+                user.setLastName("");
+                userDAO.save(user);
+            }
+
+
+        }
+    }
 }
 
 
