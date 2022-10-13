@@ -97,8 +97,15 @@ public class BoardService {
         return boardDAO.saveBoard(board);
     }
 
-    public Board updateBoard(Board board) {
-        return boardDAO.saveBoard(board);
+    public Board updateBoard(Long boardId, Board board) {
+        Optional<Board> maybeBoard = boardDAO.findBoardById(boardId);
+        if (maybeBoard.isEmpty()) {
+            return boardDAO.saveBoard(board);
+        }
+        Board boardToUpdate = maybeBoard.get();
+        boardToUpdate.setBoardName(board.getBoardName());
+        boardToUpdate.setBoardDescription(board.getBoardDescription());
+        return boardDAO.saveBoard(boardToUpdate);
     }
 }
 

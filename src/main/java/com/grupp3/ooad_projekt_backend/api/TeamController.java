@@ -47,8 +47,8 @@ public class TeamController {
     }
 
     @PutMapping("{team_id}/edit")
-    public String editTeamName(@PathVariable("team_id") Long teamId, @RequestParam String teamName){
-        return teamService.editTeamName(teamId,teamName);
+    public Team editTeamName(@PathVariable("team_id") Long teamId, @RequestBody Team team){
+        return teamService.editTeamName(teamId,team);
 
     }
 

@@ -38,7 +38,7 @@ public class ColumnController {
 
 
     @PutMapping("/{column_id}/edit")
-    public String editColumnTitle(@PathVariable("column_id") Long columnId, @RequestParam("columnTitle") String columnTitle) {
-        return columnService.editColumnTitle(columnId, columnTitle);
+    public Column editColumnTitle(@PathVariable("column_id") Long columnId, @RequestBody Column column) {
+        return columnService.editColumnTitle(columnId, column);
     }
 }

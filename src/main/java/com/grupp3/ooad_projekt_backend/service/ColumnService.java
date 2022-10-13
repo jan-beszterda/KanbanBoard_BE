@@ -79,22 +79,14 @@ public class ColumnService {
         columnDAO.removeColumnById(id);
     }
 
-    public String editColumnTitle (Long columnId, String columnTitle) {
-
-        if (columnTitle.equals("")) {
-            return "Empty string";
-        } else {
-            Optional<Column> maybeColumn = columnDAO.findColumnById(columnId);
-            if (maybeColumn.isEmpty()) return "Column not found";
-
-            Column column = maybeColumn.get();
-            column.setColumnTitle(columnTitle);
-
-            columnDAO.saveColumn(column);
-
-            return "Edit success";
-
+    public Column editColumnTitle (Long columnId, Column column) {
+        Optional<Column> maybeColumn = columnDAO.findColumnById(columnId);
+        if (maybeColumn.isEmpty()) {
+            return column;
         }
+        Column columnToUpdate = maybeColumn.get();
+        columnToUpdate.setColumnTitle(column.getColumnTitle());
+        return columnDAO.saveColumn(column);
     }
 }
 
