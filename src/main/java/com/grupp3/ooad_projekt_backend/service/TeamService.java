@@ -107,27 +107,15 @@ public class TeamService {
 
     }
 
-    public String editTeamName (Long teamId, String teamName){
-
-        if (teamName.equals("")){
-            return "Empty string";
+    public Team editTeamName (Long teamId, Team updatedTeam){
+        Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);
+        if (maybeTeam.isEmpty()) {
+            return updatedTeam;
         }
-        else {
-            Optional<Team> maybeTeam = teamDAO.getTeamById(teamId);
-            if (maybeTeam.isEmpty()) return "Team not found";
-
-            Team team = maybeTeam.get();
-            team.setTeamName(teamName);
-
-            teamDAO.saveTeam(team);
-
-            return "Edit success";
-
-        }
-
-
-
-
+        Team team = maybeTeam.get();
+        team.setTeamName(updatedTeam.getTeamName());
+        team.setTeamDescription(updatedTeam.getTeamDescription());
+        return teamDAO.addTeam(team);
     }
 
     public List<Team> getTeamInvitationsByMemberId(Long userId) {

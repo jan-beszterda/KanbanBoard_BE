@@ -34,9 +34,9 @@ public class BoardController {
         return boardService.addBoard(teamId, board);
     }
 
-    @PostMapping("/update")
-    public Board updateBoard(@RequestBody Board board) {
-        return boardService.updateBoard(board);
+    @PutMapping("/{board_id}/update")
+    public Board updateBoard(@PathVariable("board_id") Long boardId, @RequestBody Board board) {
+        return boardService.updateBoard(boardId, board);
     }
 
 
