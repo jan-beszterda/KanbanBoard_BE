@@ -1,52 +1,47 @@
 package com.grupp3.ooad_projekt_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(	name = "users",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "username")
+                /*@UniqueConstraint(columnNames = "username"),*/ @UniqueConstraint(columnNames = "email")
         })
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String userName;
-
-
+    private Long userId;
     private String firstName;
-
-
     private String lastName;
-
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
-
     private String email;
+    @ManyToMany(mappedBy = "teamMembers")
+    @JsonIgnore
+    private List<Team> teams;
+
+    @ManyToMany (mappedBy = "invited")
+    @JsonIgnore
+    private List<Team> invitations;
 
     public User(){}
 
-    public User(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
+    public List<Team> getInvitations() {
+        return invitations;
     }
 
-    public Long getId() {
-        return id;
+    public void setInvitations(List<Team> invitations) { this.invitations = invitations; }
+
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(Long id) {
+        this.userId = id;
     }
 
     public String getFirstName() {
@@ -79,5 +74,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }

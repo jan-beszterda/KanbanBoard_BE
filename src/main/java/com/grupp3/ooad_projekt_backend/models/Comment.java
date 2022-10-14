@@ -1,19 +1,18 @@
 package com.grupp3.ooad_projekt_backend.models;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments")
 
 public class Comment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
     private String commentText;
-
-    @ManyToOne
-    @JoinColumn(name = "id")
+    private LocalDateTime publishedOn;
+    @OneToOne
     private User user;
 
     public Comment() {
@@ -33,6 +32,14 @@ public class Comment {
 
     public void setCommentText(String commentText) {
         this.commentText = commentText;
+    }
+
+    public LocalDateTime getPublishedOn() {
+        return publishedOn;
+    }
+
+    public void setPublishedOn(LocalDateTime publishedOn) {
+        this.publishedOn = publishedOn;
     }
 
     public User getUser() {

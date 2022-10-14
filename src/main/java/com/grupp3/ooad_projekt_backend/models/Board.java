@@ -1,29 +1,29 @@
 package com.grupp3.ooad_projekt_backend.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(	name = "boards",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "boardname")
-        })
+@Table(	name = "boards")
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Long boardId;
     private String boardName;
+    private String boardDescription;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="boardId")
+    private List<Column> columnList;
 
-    public Board(String boardName) {
-        this.boardName = boardName;
+    public Board() {
     }
 
     public Long getId() {
-        return id;
+        return boardId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.boardId = id;
     }
 
     public String getBoardName() {
@@ -33,4 +33,23 @@ public class Board {
     public void setBoardName(String boardName) {
         this.boardName = boardName;
     }
+
+    public String getBoardDescription() {
+        return boardDescription;
+    }
+
+    public void setBoardDescription(String boardDescription) {
+        this.boardDescription = boardDescription;
+    }
+
+    public List<Column> getColumnList() {
+        return columnList;
+    }
+
+    public void setColumnList(List<Column> columnList) {
+        this.columnList = columnList;
+    }
+
+    public void addColumn(Column column){ this.columnList.add(column); }
+
 }
